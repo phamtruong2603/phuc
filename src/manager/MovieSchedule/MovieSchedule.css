@@ -1,0 +1,29 @@
+.MovieSchedule header{
+    display: flex;
+    justify-content: center;
+    font-size: 1.2rem;
+    margin: 1rem 0;
+    font-weight: bold;
+}
+
+.content-MovieSchedule {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left_content-MovieSchedule {
+    display: flex;
+}
+.left_content-MovieSchedule>div span {
+    display: block;
+    margin-bottom: 0.5rem;
+    margin-left: 1rem;
+}
+.right_content-MovieSchedule div{
+    margin: 0.3rem 0;
+}
+
+.right_content-MovieSchedule div button{
+    width: 150px;
+}
+

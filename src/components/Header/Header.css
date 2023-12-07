@@ -1,0 +1,40 @@
+.header {
+    height: 10vh;
+    /* box-sizing: border-box; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5rem;
+    background-color: rgb(61, 61, 242);
+    color: white;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.header-right {
+    display: flex;
+}
+
+.auth {
+    display: flex;
+}
+
+.auth>span {
+    margin: 0 1rem;
+    padding: 0rem 1rem;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+
+.auth>span {
+    background-color: white;
+    border: 1px solid blue;
+    color: blue;
+    height: 2rem;
+}
