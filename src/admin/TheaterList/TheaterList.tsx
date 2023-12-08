@@ -1,19 +1,30 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import TableTheaterList from '../../components/Table/TableTheaterList';
 import { GetAllCinema } from '../../apis/theater';
 
 
 const TheaterList = () => {
 
-  // useEffect(() => {
-  //   (async() => {
-  //     const res = await GetAllCinema()
-  //     console.log(res)
-  //   })()
-  // }, [])
+  const [listTheater, setListTheater] = useState<any>()
+  useEffect(() => {
+    (async() => {
+      const res = await GetAllCinema()
+      if(res?.code === 200) {
+        const newData = res.data.map((value: any, index: number) => {
+          return({
+            key: index,
+            ...value,
+            fullname: value.admin.fullname
+          })
+        })
+        setListTheater(newData)
+      }
+    })()
+  }, [])
+
   return (
     <div>
-        <TableTheaterList dataSource={[]} />
+        <TableTheaterList dataSource={listTheater} />
     </div>
   )
 }

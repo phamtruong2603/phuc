@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Space, Table, Tag } from "antd";
+import { Table } from "antd";
 import type { ColumnsType } from 'antd/es/table';
 
 interface ITableRoom {
@@ -10,8 +10,8 @@ interface ITableRoom {
 const columns: ColumnsType<any> = [
     {
         title: 'STT',
-        dataIndex: 'id',
-        key: 'id',
+        dataIndex: 'key',
+        key: 'key',
         align: 'center',
         className: ''
     },
@@ -24,15 +24,15 @@ const columns: ColumnsType<any> = [
     },
     {
         title: 'Địa Chỉ',
-        key: 'price',
-        dataIndex: 'price',
+        key: 'address',
+        dataIndex: 'address',
         align: 'center',
         className: ''
     },
     {
         title: 'Admin',
-        key: 'max_user',
-        dataIndex: 'max_user',
+        key: 'fullname',
+        dataIndex: 'fullname',
         align: 'center',
         className: ''
     },

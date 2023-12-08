@@ -6,24 +6,27 @@
     font-weight: bold;
 }
 
-.content-MovieSchedule {
+.Detail {
     display: flex;
     justify-content: space-between;
+    margin: 1rem 0;
+    border-bottom: 1px solid rgb(199, 199, 199);
+    padding: 0.5rem;
 }
 
-.left_content-MovieSchedule {
+.left_Detail {
     display: flex;
 }
-.left_content-MovieSchedule>div span {
+.left_Detail>div span {
     display: block;
     margin-bottom: 0.5rem;
     margin-left: 1rem;
 }
-.right_content-MovieSchedule div{
+.right_Detail div{
     margin: 0.3rem 0;
 }
 
-.right_content-MovieSchedule div button{
+.right_Detail div button{
     width: 150px;
 }
 

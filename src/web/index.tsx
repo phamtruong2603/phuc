@@ -3,10 +3,14 @@ import { Route, Routes } from 'react-router-dom';
 import Header from '../components/Header/Header';
 import NavigateNotFound from '../components/NotFound/NavigateNotFound';
 
+import UploadImage from '../components/UploadImage/UploadImage';
+
 const Web = () => {
   return (
     <div className='web'>
       <Header />
+
+      <UploadImage />
       <Routes>
         <Route path="" element={<></>} />
 

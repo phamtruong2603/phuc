@@ -1,17 +1,16 @@
+import { role } from "./role"
+
 export interface User {
     id: number
-    avatar?: string
-    first_name?: string
-    last_name?: string
-    mobile?: string
-    sex?: string
-    cmnd?: string
-    role: string
     address?: string
-    email: string
-    token: string
-    room_id?: number
-    bill_id?: number
-    booking_id?: number
+    blocked?: boolean
+    dateOfBirth?: string
+    email?: string
+    fullname?: string
+    password?:string
+    phone?: string
+    refreshToken?: string
+    role: any
+    token?: string
     username?: string
 }

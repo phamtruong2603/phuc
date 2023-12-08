@@ -1,6 +1,5 @@
-import axios from "axios"
+import { callApi } from "./callAPI"
 
 export const GetAllCinema = async () => {
-    const res = await axios.post('http://localhost:8080/cinema-service/api/v1/cinema')
-    return res.data
+    return await callApi<any>("cinema-service/api/v1/cinema", "post")
 }

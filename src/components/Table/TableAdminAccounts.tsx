@@ -10,8 +10,8 @@ interface ITableRoom {
 const columns: ColumnsType<any> = [
     {
         title: 'STT',
-        dataIndex: 'id',
-        key: 'id',
+        dataIndex: 'key',
+        key: 'key',
         align: 'center',
         className: ''
     },
@@ -24,42 +24,43 @@ const columns: ColumnsType<any> = [
     },
     {
         title: 'Username',
-        key: 'price',
-        dataIndex: 'price',
+        key: 'username',
+        dataIndex: 'username',
         align: 'center',
         className: ''
     },
     {
         title: 'Email',
-        key: 'max_user',
-        dataIndex: 'max_user',
+        key: 'email',
+        dataIndex: 'email',
         align: 'center',
         className: ''
     },
     {
         title: 'Địa Chỉ',
-        key: 'max_user',
-        dataIndex: 'max_user',
-        align: 'center',
-        className: ''
-    },
-    {
-        title: 'Trạng Thái',
-        key: 'max_user',
-        dataIndex: 'max_user',
+        key: 'address',
+        dataIndex: 'address',
         align: 'center',
         className: ''
     },
     {
         title: 'Rạp Quản Lý',
-        key: 'max_user',
-        dataIndex: 'max_user',
+        key: 'nameCinema',
+        dataIndex: 'nameCinema',
+        align: 'center',
+        className: ''
+    },
+    {
+        title: 'Trạng Thái',
+        key: 'blocked',
+        dataIndex: 'blocked',
         align: 'center',
         className: ''
     },
 ];
 
 const TableAdminAccounts:React.FC<ITableRoom> = ({ dataSource }) => {
+    console.log(dataSource)
     return (
         <Table
             bordered={true}

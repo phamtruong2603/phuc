@@ -22,8 +22,7 @@ export const register = async (
 export const login = async (
     data: any
 ) => {
-    // return await callApi<any>("http://localhost:8082/api/v1/auth/signin", "post", data, "multipart/form-data")
-    return await axios.post('http://localhost:8082/api/v1/auth/signin', data)
+    return await callApi<any>("account-service/api/v1/auth/signin", "post", data, "multipart/form-data")
 }
 
 export const loginByToken = async () => {
@@ -31,8 +30,7 @@ export const loginByToken = async () => {
     if(token) {
         axios.defaults.headers.common['Auth'] = `${token}`;
         try {
-            const res = await axios.get("http://localhost:8080/account-service/api/v1/auth/verify-token")
-            return res.data
+            return await callApi<any>("account-service/api/v1/auth/verify-token", "get")
             
         } catch (error) {
             console.log(error)

@@ -34,7 +34,6 @@ export const AuthContext: React.FC<IAuthContext> = ({ children }) => {
     const autoLogin = async () => {
         if (localStorage.getItem('token')) {
             const res = await loginByToken()
-            console.log(res)
             if (res?.data) {
                 setUserState?.({
                     isLogin: true,

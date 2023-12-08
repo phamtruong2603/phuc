@@ -3,6 +3,7 @@ import Header from "../components/Header/Header";
 import Siderbar from "../components/Siderbar/Siderbar";
 
 import MovieSchedule from "./MovieSchedule/MovieSchedule";
+import CreateMovie from "./CreateMovie/CreateMovie";
 
 const Manager = () => {
   return (
@@ -17,7 +18,7 @@ const Manager = () => {
             <Route path="/projection-history" element={<></>} />
             <Route path="/create-room" element={<></>} />
             <Route path="/room-list" element={<></>} />
-            <Route path="/create-movies" element={<></>} />
+            <Route path="/create-movies" element={<CreateMovie />} />
             <Route path="/movie-list" element={<></>} />
           </Routes>
         </div>

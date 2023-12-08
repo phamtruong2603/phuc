@@ -12,22 +12,6 @@ import { AuthContextProvider } from '../../contexts/AuthContext';
 const { Content, Sider } = Layout;
 const { confirm } = Modal;
 
-const list = false ? listSidebarStaff : listSidebarAdmin
-
-const items: any = list.map((item: MenuItem) => {
-  return {
-    key: item.key,
-    // icon:
-    label: item.titleSidebar,
-    children: item.children &&
-      item.children.map((childrenItem: MenuItem) => {
-        return {
-          key: childrenItem.key,
-          label: childrenItem.titleSidebar,
-        }
-      })
-  }
-})
 
 const Siderbar = () => {
   const {
@@ -36,6 +20,24 @@ const Siderbar = () => {
 
   const navigate = useNavigate();
   const auth = useContext(AuthContextProvider);
+  const user = auth?.userState
+  const list = user?.user?.role.name === "SUPER_ADMIN" ? listSidebarAdmin
+    : listSidebarStaff
+
+  const items: any = list.map((item: MenuItem) => {
+    return {
+      key: item.key,
+      // icon:
+      label: item.titleSidebar,
+      children: item.children &&
+        item.children.map((childrenItem: MenuItem) => {
+          return {
+            key: childrenItem.key,
+            label: childrenItem.titleSidebar,
+          }
+        })
+    }
+  })
 
   const findItem = ({ key }: { key: string }) => {
     const itemActive: MenuItem[] = []
@@ -64,7 +66,7 @@ const Siderbar = () => {
           navigate("/login")
           auth?.logout()
         },
-        onCancel() {},
+        onCancel() { },
       });
     };
 

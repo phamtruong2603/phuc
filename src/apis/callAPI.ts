@@ -1,10 +1,10 @@
 import axios, { AxiosResponse, AxiosRequestConfig } from "axios";
 
-// const API_URL = 'http://127.0.0.1:3001/api/v1';
+const API_URL = 'http://10.20.51.27:8080';
 
 interface ApiCallResponse<T> {
-    status: string;
-    message: string;
+    status?: string;
+    msg?: string;
     code: number;
     data: T;
 }
@@ -22,7 +22,7 @@ export const callApi = async <T>(
 
         const requestData: AxiosRequestConfig = {
             method,
-            url: `${URL}`,
+            url: `${API_URL}/${URL}`,
             headers: {
                 'Content-Type': ContentType,
                 Authorization: `Bearer ${token}`,
@@ -32,7 +32,6 @@ export const callApi = async <T>(
         if (ContentType === "multipart/form-data") {
             const formData = new FormData();
             for (const key in data) {
-                console.log(data)
                 formData.append(key, data[key]);
             }
             data = formData

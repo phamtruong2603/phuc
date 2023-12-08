@@ -25,24 +25,20 @@ const Form = () => {
     const navigate = useNavigate()
     const submitFormLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append("username", `${data.username}`)
-        formData.append("password", `${data.password}`)
-        const res = await login(formData)
-        // const res = await login(data)
-        if (res.data.code === 200) {
-            console.log(res.data.data)
+
+        const res = await login(data)
+        if (res?.code === 200) {
             setUserState?.({
                 isLogin: true,
-                user: res.data.data,
-                token: res.data.data.token
+                user: res.data,
+                token: res.data.token
             })
-            localStorage.setItem('token', res.data.data.token)
+            localStorage.setItem('token', res.data.token)
             success("Đăng nhập thành công")
-            res.data.data.role.name === "SUPER_ADMIN" ?
+            res.data.role.name === "SUPER_ADMIN" ?
                 navigate('/super-admin/theater-list')
                 :
-                res.data.data.role.name === "ADMIN" ?
+                res.data.role.name === "ADMIN" ?
                     navigate('/admin')
                     :
                     navigate('/')
