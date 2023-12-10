@@ -9,7 +9,6 @@ const AdminAccounts = () => {
   useEffect(() => {
     (async() => {
       const res = await findAllAdminAccount()
-      console.log(res)
       if(res?.code === 200) {
         const newData = res.data.map((value: any, index: number) => {
           return({

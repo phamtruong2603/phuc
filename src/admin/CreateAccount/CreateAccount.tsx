@@ -1,12 +1,44 @@
-import { Button, DatePicker, Form, Input, InputNumber, Select } from 'antd'
+import { Button, DatePicker, Form, Input } from 'antd';
+import type { DatePickerProps } from 'antd';
+import { useContext, useState } from 'react';
+import { createAcount } from '../../apis/user';
+import { MessageContextProvider } from '../../contexts/MessageContext';
 
-type FieldType = {};
+type FieldType = {
+
+};
 
 // Email, Họ và tên, Ngày sinh, Địa chỉ, Điện thoại, Tên đăng nhập, Mật Khẩu
 const CreateAccount = () => {
   const initialValues = {}
+  const mess = useContext(MessageContextProvider)
+  const success = mess?.success
+  const error = mess?.error
+ 
+  const [data, setData] = useState<any>()
 
-  const onFinish = async (values: FieldType) => { };
+  const onFinish = async (values: FieldType) => {
+    const req = {
+      ...data,
+      ...values
+    }
+    const res = await createAcount(req)
+    console.log(res)
+    if(res?.code === 200) {
+      success("Tạo thành công")
+    }
+    else{
+      error(res?.msg)
+    }
+  };
+
+  const onChange: DatePickerProps['onChange'] = (date, dateString) => {
+    console.log(dateString);
+    setData({
+      ...data,
+      dateOfBirth: dateString
+    })
+  };
 
   return (
     <Form
@@ -20,63 +52,53 @@ const CreateAccount = () => {
     >
       <Form.Item<FieldType>
         label="Email"
-        name="name"
+        name="email"
       >
         <Input placeholder='' />
       </Form.Item>
 
       <Form.Item<FieldType>
         label="Họ và tên"
-        name="description"
+        name="fullname"
       >
         <Input placeholder='' />
       </Form.Item>
 
       <Form.Item<FieldType>
         label="Ngày sinh"
-        name="status"
       >
         <DatePicker
+          onChange={onChange}
           style={{ width: '100%' }}
         />
       </Form.Item>
 
       <Form.Item<FieldType>
         label="Địa chỉ"
-        name="category"
+        name="address"
       >
         <Input placeholder='' />
       </Form.Item>
 
       <Form.Item<FieldType>
         label="Điện thoại"
-        name="price"
+        name="phone"
       >
-        <InputNumber
-          style={{ width: '100%' }}
-          min={0}
-        />
+        <Input placeholder='' />
       </Form.Item>
       <Form.Item<FieldType>
         label="Tên đăng nhập"
-        name="max_user"
+        name="username"
       >
-        <InputNumber
-          style={{ width: '100%' }}
-          min={1}
-          max={4}
-        />
+        <Input placeholder='' />
       </Form.Item>
 
       <Form.Item<FieldType>
         label="Mật Khẩu"
-        name="hotel_id"
+        name="password"
 
       >
-        <InputNumber
-          style={{ width: '100%' }}
-          disabled={true}
-        />
+        <Input placeholder='' />
       </Form.Item>
 
 
