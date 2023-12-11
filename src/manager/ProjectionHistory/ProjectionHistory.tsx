@@ -1,8 +1,14 @@
-import React from 'react'
+import React from 'react';
+import Detail from './Detail';
 
 const ProjectionHistory = () => {
   return (
-    <div>ProjectionHistory</div>
+    <div>
+      <header>Lịch sử chiếu</header>
+      <Detail 
+        data={null}
+      />
+    </div>
   )
 }
 

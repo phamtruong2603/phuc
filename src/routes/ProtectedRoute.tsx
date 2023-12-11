@@ -1,4 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom";
+import { AuthContextProvider } from "../contexts/AuthContext";
+import { useContext } from "react";
 
 const RefreshUrl = () => {
   const token = localStorage.getItem("token")
@@ -9,9 +11,12 @@ const RefreshUrl = () => {
 };
 
 const ProtectedMain = () => {
-  const isAuth = true
 
-  return !isAuth ? <RefreshUrl /> : <Outlet />;
+  const auth = useContext(AuthContextProvider);
+  const user = auth?.userState
+  const login = user?.isLogin
+
+  return !login ? <RefreshUrl /> : <Outlet />;
 };
 
 export default ProtectedMain;

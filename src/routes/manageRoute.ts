@@ -20,8 +20,8 @@ export const listSidebarStaff: MenuItem[] = [
     },
     {
         titleSidebar: "Tạo phòng",
-        key: "create-room,",
-        url: "create-room,",
+        key: "create-room",
+        url: "create-room",
     },
     {
         titleSidebar: "Danh sách phòng",
