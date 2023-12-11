@@ -1,10 +1,48 @@
-import React from 'react';
-import { Button, Form, Input, Select } from 'antd';
+import React, { useContext, useEffect } from 'react';
+import { Button, Form, Input, InputNumber } from 'antd';
+import { MoviesContextProvider } from '../../contexts/Movies';
+import { AuthContextProvider } from '../../contexts/AuthContext';
+import { MessageContextProvider } from '../../contexts/MessageContext';
+import { createRoom } from '../../apis/theater';
+
 type FieldType = {};
 
 const CreateRoom = () => {
+
+    const auth = useContext(AuthContextProvider)
+    const user = auth?.userState.user
+
+    const moviesContext = useContext(MoviesContextProvider)
+    const findCinema = moviesContext?.findCinema
+    const cinema = moviesContext?.movies.cinema
+
+    const mess = useContext(MessageContextProvider)
+    const success = mess?.success
+    const error = mess?.error
+
     const initialValues = {}
-    const onFinish = () => { }
+    const onFinish = async(value: any) => {
+        const req = {
+            ...value,
+            cinemaId: cinema.id
+        }
+        console.log(req)
+        const res = await createRoom(req)
+        console.log(res)
+        if(res?.code === 200) {
+            success("Tạo phòng thành công :vv")
+        }else {
+            error(res?.msg)
+        }
+    }
+
+    useEffect(() => {
+        if (user) {
+            findCinema(user.id)
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user])
+
     return (
         <div>
             <header>Tạo phòng </header>
@@ -19,23 +57,28 @@ const CreateRoom = () => {
                 initialValues={initialValues}
             >
                 <Form.Item<FieldType>
-                    label="Chọn phim"
+                    label="Tên phòng"
                     name="name"
                 >
                     <Input />
                 </Form.Item>
 
                 <Form.Item<FieldType>
-                    label="Chọn phòng chiếu"
+                    label="Số hàng ghế"
+                    name="verticalSeats"
                 >
-                    <Input />
+                    <InputNumber
+                        style={{ width: "100%" }}
+                    />
                 </Form.Item>
 
                 <Form.Item<FieldType>
-                    label="Giờ chiếu"
-                    name="description"
+                    label="Số chỗ mỗi hàng"
+                    name="horizontalSeats"
                 >
-                    <Input />
+                    <InputNumber
+                        style={{ width: "100%" }}
+                    />
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>

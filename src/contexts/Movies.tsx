@@ -1,4 +1,5 @@
 import React, { ReactNode, createContext, useState } from 'react';
+import { findCinemaByAdmin } from '../apis/theater';
 
 interface IMoviesContext {
     children: ReactNode;
@@ -7,6 +8,7 @@ interface IMoviesContext {
 interface IMoviesContextProvider {
     movies: Imovies
     setMovies : (movies: Imovies) => void
+    findCinema: any
 }
 
 interface Imovies {
@@ -25,9 +27,24 @@ const MoviesContext: React.FC<IMoviesContext> = ({ children }) => {
 
     const [movies, setMovies] = useState<Imovies>(defaultMovies)
 
+    const findCinema = async (userId: number) => {
+        const res = await findCinemaByAdmin({ adminId: userId })
+        if (res?.code === 200) {
+            setMovies({
+               cinema: {
+                ...res.data,
+               },
+               movies : []
+            })
+        } else {
+            console.log(".................")
+        }
+    }
+
     const data = {
         movies,
-        setMovies
+        setMovies,
+        findCinema
     }
     return (
         <MoviesContextProvider.Provider value={data}>{children}</MoviesContextProvider.Provider>

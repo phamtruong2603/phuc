@@ -8,12 +8,9 @@ interface IDetail {
 
 const Detail: React.FC<IDetail> = ({data}) => {
 
-    console.log(data)
-
-    const urlImg = data.schedule.film.thumnails[0].url
-
     if(!data) return <></>
-
+    
+    const urlImg = data.schedule.film.thumnails[0].url
     return (
         <div className='Detail'>
             <div className='left_Detail'>

@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import "./MovieSchedule.css";
 import Detail from './Detail';
-import { findCinemaByAdmin } from '../../apis/theater';
 import { AuthContextProvider } from '../../contexts/AuthContext';
 import { MoviesContextProvider } from '../../contexts/Movies';
 import { getCurrentScheduleInCinema } from '../../apis/theater';
@@ -13,25 +12,13 @@ const MovieSchedule = () => {
 
     const movieContext = useContext(MoviesContextProvider)
     const movies = movieContext?.movies
-    const setMovies = movieContext?.setMovies
+    const findCinema = movieContext?.findCinema
 
     const [schedule, setSchedule] = useState<any>([])
 
     useEffect(() => {
-        if (user && setMovies) {
-            (async () => {
-                const res = await findCinemaByAdmin({ adminId: user?.id })
-                if (res?.code === 200) {
-                    setMovies({
-                       cinema: {
-                        ...res.data,
-                       },
-                       movies : []
-                    })
-                } else {
-                    console.log(".................")
-                }
-            })()
+        if (user) {
+            findCinema(user.id)
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user])

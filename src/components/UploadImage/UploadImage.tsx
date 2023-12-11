@@ -2,22 +2,25 @@ import React, { useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { message, Upload } from 'antd';
 import type { UploadFile, UploadProps } from 'antd/es/upload/interface';
-interface IUploadImage{
+interface IUploadImage {
     setFile?: any
 }
 
-const UploadImage:React.FC<IUploadImage> = ({setFile}) => {
+const UploadImage: React.FC<IUploadImage> = ({ setFile }) => {
     const [fileList, setFileList] = useState<UploadFile[]>([])
 
     const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
-        const length = newFileList.length
+        console.log(newFileList)
+        if (newFileList.length > 0) {
+            const length = newFileList.length
 
-        const isJpgOrPng = newFileList[length - 1].type === 'image/jpeg' || newFileList[length - 1].type === 'image/png';
-        if (!isJpgOrPng) {
-            message.error('Bạn chỉ có thể tải lên tệp JPG/PNG!');
-        } else {
-            setFileList(newFileList)
-            setFile(newFileList)
+            const isJpgOrPng = newFileList[length - 1].type === 'image/jpeg' || newFileList[length - 1].type === 'image/png';
+            if (!isJpgOrPng) {
+                message.error('Bạn chỉ có thể tải lên tệp JPG/PNG!');
+            } else {
+                setFileList(newFileList)
+                setFile(newFileList)
+            }
         }
     }
 

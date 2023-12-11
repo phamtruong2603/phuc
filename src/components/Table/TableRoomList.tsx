@@ -26,15 +26,15 @@ const TableRoomList:React.FC<ITableRoomList> = ({dataSource}) => {
         },
         {
             title: 'Số hàng ghế',
-            key: 'address',
-            dataIndex: 'address',
+            key: 'verticalSeats',
+            dataIndex: 'verticalSeats',
             align: 'center',
             className: ''
         },
         {
             title: 'Số ghế mỗi hàng',
-            key: 'fullname',
-            dataIndex: 'fullname',
+            key: 'horizontalSeats',
+            dataIndex: 'horizontalSeats',
             align: 'center',
             className: ''
         },
