@@ -1,65 +1,43 @@
 import React, { useState } from 'react';
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined } from '@ant-design/icons';
 import { message, Upload } from 'antd';
-import type { UploadChangeParam } from 'antd/es/upload';
-import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface';
+import type { UploadFile, UploadProps } from 'antd/es/upload/interface';
+interface IUploadImage{
+    setFile?: any
+}
 
-const getBase64 = (img: RcFile, callback: (url: string) => void) => {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => callback(reader.result as string));
-    reader.readAsDataURL(img);
-};
+const UploadImage:React.FC<IUploadImage> = ({setFile}) => {
+    const [fileList, setFileList] = useState<UploadFile[]>([])
 
-// kiem tra truoc khi tai anh
-const beforeUpload = (file: RcFile) => {
-    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-    const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isJpgOrPng) {
-        message.error('Bạn chỉ có thể tải lên tệp JPG/PNG!');
-    } else if (!isLt2M) {
-        message.error('Hình ảnh phải nhỏ hơn 2MB!');
+    console.log(fileList)
+    const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
+        const length = newFileList.length
+
+        const isJpgOrPng = newFileList[length - 1].type === 'image/jpeg' || newFileList[length - 1].type === 'image/png';
+        if (!isJpgOrPng) {
+            message.error('Bạn chỉ có thể tải lên tệp JPG/PNG!');
+        } else {
+            setFileList(newFileList)
+            setFile(newFileList)
+        }
     }
-    return isJpgOrPng && isLt2M;
-};
-
-
-const UploadImage = () => {
-    const [loading, setLoading] = useState(false);
-    const [imageUrl, setImageUrl] = useState<string>();
-
-    const handleChange: UploadProps['onChange'] = (info: UploadChangeParam<UploadFile>) => {
-        console.log(info)
-        if (info.file.status === 'uploading') {
-            console.log(info.file.status)
-            setLoading(true);
-            return;
-        }
-        if (info.file.status === 'done') {
-            getBase64(info.file.originFileObj as RcFile, (url) => {
-                console.log(url)
-                setLoading(false);
-                setImageUrl(url);
-            });
-        }
-    };
 
     const uploadButton = (
         <div>
-            {loading ? <LoadingOutlined /> : <PlusOutlined />}
+            <PlusOutlined />
             <div style={{ marginTop: 8 }}>Upload</div>
         </div>
     );
+
     return (
         <Upload
-            name="avatar"
-            listType="picture-card"
-            className="avatar-uploader"
-            showUploadList={false}
             action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
-            beforeUpload={beforeUpload}
+            listType="picture-card"
+            fileList={fileList}
+            // beforeUpload={beforeUpload}
             onChange={handleChange}
         >
-            {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+            {fileList.length >= 8 ? null : uploadButton}
         </Upload>
     )
 }

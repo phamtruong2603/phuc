@@ -12,20 +12,23 @@ import NotFound from './components/NotFound';
 //
 import { AuthContext } from './contexts/AuthContext';
 import MessageContext from './contexts/MessageContext';
+import MoviesContext from './contexts/Movies';
 
 function App() {
   return (
     <div className="App">
       <AuthContext>
         <MessageContext>
-          <Routes>
-            <Route path="super-admin/*" element={<Admin />} />
-            <Route path="admin/*" element={<Manager />} />
-            <Route path="/login" element={<Form />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/*" element={<Web />} />
-            <Route path="/not-found" element={<NotFound />} />
-          </Routes>
+          <MoviesContext>
+            <Routes>
+              <Route path="super-admin/*" element={<Admin />} />
+              <Route path="admin/*" element={<Manager />} />
+              <Route path="/login" element={<Form />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/*" element={<Web />} />
+              <Route path="/not-found" element={<NotFound />} />
+            </Routes>
+          </MoviesContext>
         </MessageContext>
       </AuthContext>
     </div>

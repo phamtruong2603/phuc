@@ -1,6 +1,6 @@
 import axios, { AxiosResponse, AxiosRequestConfig } from "axios";
 
-const API_URL = 'http://172.20.10.7:8080';
+const API_URL = 'http://26.64.67.224:8080';
 
 interface ApiCallResponse<T> {
     status?: string;

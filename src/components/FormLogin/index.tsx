@@ -16,6 +16,7 @@ const Form = () => {
     const message = useContext(MessageContextProvider);
     const setUserState = auth?.setUserState
     const success = message?.success
+    const error = message?.error
 
     const [data, setData] = useState<IFormLogin>({
         username: undefined,
@@ -27,6 +28,7 @@ const Form = () => {
         e.preventDefault();
 
         const res = await login(data)
+        console.log(res)
         if (res?.code === 200) {
             setUserState?.({
                 isLogin: true,
@@ -39,9 +41,11 @@ const Form = () => {
                 navigate('/super-admin/theater-list')
                 :
                 res.data.role.name === "ADMIN" ?
-                    navigate('/admin')
+                    navigate('/admin/movie-schedule')
                     :
                     navigate('/')
+        }else{
+            error(res?.msg)
         }
     };
 
