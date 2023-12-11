@@ -65,10 +65,7 @@ const CreateMovie = () => {
         })
     };
     const onFinish = async (values: FieldType) => {
-        // const newFile = file.map((value: any) => value.originFileObj)
         const newFile = converThumnails(file)
-        console.log(newFile)
-        console.log(data)
         const req = {
             ...values,
             ...data,

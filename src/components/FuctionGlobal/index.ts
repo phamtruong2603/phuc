@@ -28,7 +28,7 @@ export function converThumnails(arr: any[]): { [key: string]: any } {
     const result: { [key: string]: any } = {};
 
     arr.forEach((value, index) => {
-        result[`thumnails[${index}]`] = value;
+        result[`thumnails[${index}]`] = value.originFileObj;
     });
 
     return result;

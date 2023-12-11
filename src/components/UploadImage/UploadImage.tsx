@@ -9,7 +9,6 @@ interface IUploadImage{
 const UploadImage:React.FC<IUploadImage> = ({setFile}) => {
     const [fileList, setFileList] = useState<UploadFile[]>([])
 
-    console.log(fileList)
     const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
         const length = newFileList.length
 
@@ -21,6 +20,9 @@ const UploadImage:React.FC<IUploadImage> = ({setFile}) => {
             setFile(newFileList)
         }
     }
+
+    // const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) => setFileList(newFileList)
+
 
     const uploadButton = (
         <div>
