@@ -1,29 +1,10 @@
 import React from 'react';
 import { Button, Image, Modal } from 'antd';
 import { converDate, converTime } from '../../components/FuctionGlobal';
-import { CloseOutlined, ExclamationCircleFilled } from '@ant-design/icons';
-const { confirm } = Modal;
 
 interface IDetail {
     data: any
 }
-
-const showLogoutModal = () => {
-    confirm({
-        title: "Bạn có chắc muốn thoát đăng nhập  ",
-        icon: <ExclamationCircleFilled />,
-        okText: "Đăng xuất =((",
-        closeIcon: <CloseOutlined />,
-        cancelText: "Ở lại",
-        onOk() {
-            return new Promise(() => {
-
-            })
-            .then()
-        },
-        onCancel() { },
-    });
-};
 
 const Detail: React.FC<IDetail> = ({ data }) => {
 
@@ -49,8 +30,7 @@ const Detail: React.FC<IDetail> = ({ data }) => {
             <div className='right_Detail'>
                 <div><Button>Sửa</Button></div>
                 <div><Button>Xóa</Button></div>
-                <div>Còn lại: {`${data.availables}/${data.totalSeats}`}</div>
-                <div><Button>Xem vé đã đặt</Button></div>
+                <div><Button>Xem đánh giá</Button></div>
             </div>
         </div>
     )
