@@ -1,25 +1,53 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, DatePicker, Form, Input, InputNumber, Select } from 'antd';
-import type { DatePickerProps } from 'antd';
 import type { SelectProps } from 'antd';
 import UploadImage from '../../components/UploadImage/UploadImage';
-import { createMovies } from '../../apis/movie';
+import { getFilmById, updateMovie } from '../../apis/movie';
 import { converThumnails } from '../../components/FuctionGlobal';
+import { useNavigate, useParams } from 'react-router-dom';
+import dayjs from "dayjs";
 import { MessageContextProvider } from '../../contexts/MessageContext';
 
 type FieldType = {};
 
 // Tên phim, Thể loại, Mô tả, Ngày phát hành, Thời lượng(phút), Ảnh thumbnails
-const CreateMovie = () => {
-    const initialValues = {}
+const UpdateMovie = () => {
 
     const mess = useContext(MessageContextProvider)
     const success = mess?.success
     const error = mess?.error
 
+    const navigate = useNavigate()
+
+    const { id } = useParams()
+
     const [file, setFile] = useState<any>()
 
-    const [data, setData] = useState<any>()
+    const [movie, setMovie] = useState<any>()
+    const [deleteThumbnails, setDeleteThumbnails] = useState<any>([])
+
+    const dateFormat = "YYYY-MM-DD";
+
+    const lisFile = movie?.thumnails.map((thumnail: any) => {
+        return ({
+            id: thumnail?.id,
+            uid: thumnail?.id,
+            name: thumnail?.publicId,
+            status: "done",
+            url: thumnail?.url,
+        })
+    })
+
+    const initialValues = {
+        ...movie,
+        releaseDate: dayjs(movie?.releaseDate),
+        types: movie?.types.map((type: any) => {
+            return ({
+                value: type.id,
+                label: type.name
+            })
+        })
+    }
 
     const options: SelectProps['options'] = [
         {
@@ -56,66 +84,80 @@ const CreateMovie = () => {
         }
     ];
 
-
-    const handleChange = (value: string[]) => {
-        setData({
-            ...data,
-            typeIds: value
-        })
-    };
-    const onChange: DatePickerProps['onChange'] = (date, dateString) => {
-        setData({
-            ...data,
-            releaseDate: dateString
-        })
-    };
-    const onFinish = async (values: FieldType) => {
-        const newFile = converThumnails(file)
-        console.log(newFile)
-        const req = {
-            ...values,
-            ...data,
-            ...newFile
+    const onFinish = async (values: any) => {
+        let checkFile
+        if(file) {
+            checkFile = file.filter((item: any) => {
+                console.log(item.id)
+                return item.id === undefined
+            })
         }
-        const res = await createMovies(req)
+        const newFile = converThumnails(checkFile)
+        const { releaseDate, types, name,description, duration } = values
+        const newDate = `${releaseDate.$y}-${releaseDate.$M + 1}-${releaseDate.$D}`
+        const typeIds = types.map((type: any) => type.value)
+        const req = {
+            id: Number(id),
+            releaseDate: newDate,
+            typeIds,
+            deleteThumbnails: deleteThumbnails,
+            ...newFile,
+            name, 
+            description,
+            duration
+        }
+        console.log(req)
+        const res = await updateMovie(req)
         if(res?.code === 200) {
-            success("Tạo mới phim thành công!!!!!!")
-        } else {
+            success("Update thành công")
+            navigate("/super-admin/movie-list")
+        }  else {
             error(res?.msg)
         }
     };
 
+    useEffect(() => {
+        if (id) {
+            (async () => {
+                const res = await getFilmById({ id: Number(id) })
+                if (res?.code === 200) {
+                    setMovie(res.data)
+                }
+            })()
+        }
+    }, [id])
+
+    if (!movie) return <></>
+
     return (
         <div className='MovieSchedule'>
-            <header>Tạo phim mới</header>
+            <header>Cập nhập phim</header>
             <Form
                 name="basic"
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 16 }}
                 style={{ maxWidth: 600 }}
                 onFinish={onFinish}
-                autoComplete="off"
                 initialValues={initialValues}
+                colon={false}
             >
+
                 <Form.Item<FieldType>
                     label="Tên phim"
                     name="name"
-                    rules={[{ required: true, message: 'Bạn cần nhập tên phim!' }]}
                 >
-                    <Input placeholder='' />
+                    <Input />
                 </Form.Item>
 
                 <Form.Item<FieldType>
                     label="Thể loại"
-                    name="typeIds"
-                    rules={[{ required: true, message: 'không được bỏ trống!' }]}
+                    name="types"
                 >
                     <Select
                         mode="multiple"
                         allowClear
                         style={{ width: '100%' }}
                         placeholder="Lựa chọn thể loại phim..."
-                        onChange={handleChange}
                         options={options}
                     />
                 </Form.Item>
@@ -123,7 +165,6 @@ const CreateMovie = () => {
                 <Form.Item<FieldType>
                     label="Mô tả"
                     name="description"
-                    rules={[{ required: true, message: 'không được bỏ trống!' }]}
                 >
                     <Input placeholder='' />
                 </Form.Item>
@@ -131,18 +172,17 @@ const CreateMovie = () => {
                 <Form.Item<FieldType>
                     label="Ngày phát hành"
                     name="releaseDate"
-                    rules={[{ required: true, message: 'không được bỏ trống!' }]}
                 >
                     <DatePicker
                         style={{ width: '100%' }}
-                        onChange={onChange}
+                        inputReadOnly={true}
+                        format={dateFormat}
                     />
                 </Form.Item>
 
                 <Form.Item<FieldType>
                     label="Thời lượng(phút)"
                     name="duration"
-                    rules={[{ required: true, message: 'không được bỏ trống!' }]}
                 >
                     <InputNumber
                         style={{ width: '100%' }}
@@ -152,8 +192,14 @@ const CreateMovie = () => {
 
                 <Form.Item<FieldType>
                     label="Ảnh thumbnails"
+                    name="thumnails"
                 >
-                    <UploadImage setFile={setFile} />
+                    <UploadImage
+                        setFile={setFile}
+                        listFile={lisFile}
+                        deleteThumbnails={deleteThumbnails}
+                        setDeleteThumbnails={setDeleteThumbnails}
+                    />
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
@@ -166,4 +212,4 @@ const CreateMovie = () => {
     )
 }
 
-export default CreateMovie
+export default UpdateMovie

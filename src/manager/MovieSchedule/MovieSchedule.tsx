@@ -16,24 +16,26 @@ const MovieSchedule = () => {
 
     const [schedule, setSchedule] = useState<any>([])
 
+    const getSchedule = async () => {
+        const res = await getCurrentScheduleInCinema({ cinemaId: movies?.cinema.id })
+        if (res?.code === 200) {
+            setSchedule(res.data)
+        }
+    }
+
     useEffect(() => {
         if (user) {
             findCinema(user.id)
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user])
 
     useEffect(() => {
-        
-        if(movies?.cinema.id) {
-            (async() => {
-                const res = await getCurrentScheduleInCinema({cinemaId: movies?.cinema.id})
-                if(res?.code === 200) {
-                    setSchedule(res.data)
-                }
-            })()
+        if (movies?.cinema.id) {
+            getSchedule()
         }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [movies])
 
     return (
@@ -41,8 +43,9 @@ const MovieSchedule = () => {
             <header>Lịch đang chiếu</header>
             {schedule.map((value: any, index: number) => {
                 return (
-                    <Detail 
+                    <Detail
                         data={value}
+                        getSchedule={getSchedule}
                     />
                 )
             })}

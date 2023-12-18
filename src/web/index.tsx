@@ -1,28 +1,18 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import Header from '../components/Header/Header';
-import NavigateNotFound from '../components/NotFound/NavigateNotFound';
+// import { Route, Routes } from 'react-router-dom';
+// import NavigateNotFound from '../components/NotFound/NavigateNotFound';
+// import HeaderWeb from '../components/Header/HeaderWeb';
 
-import UploadImage from '../components/UploadImage/UploadImage';
+// import UploadImage from '../components/UploadImage/UploadImage';
+import UpdateInfor from '../components/PersonalInformation/UpdateInfor';
 
 const Web = () => {
   return (
     <div className='web'>
-      <Header />
+      {/* <HeaderWeb /> */}
 
-      <UploadImage />
-      <Routes>
-        <Route path="" element={<></>} />
-
-        <Route path="/rooms" element={<></>} />
-        <Route path="/rooms/:id" element={<></>} />
-
-        <Route path="/attractions" element={<></>} />
-
-        <Route path="/booked-room" element={<></>} />
-
-        <Route path="/*" element={<NavigateNotFound />} />
-      </Routes>
+      <UpdateInfor />
+      
     </div>
   )
 }

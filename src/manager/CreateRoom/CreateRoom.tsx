@@ -44,7 +44,7 @@ const CreateRoom = () => {
     }, [user])
 
     return (
-        <div>
+        <div className='MovieSchedule'>
             <header>Tạo phòng </header>
 
             <Form

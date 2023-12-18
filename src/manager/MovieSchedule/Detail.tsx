@@ -1,31 +1,51 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, Image, Modal } from 'antd';
 import { converDate, converTime } from '../../components/FuctionGlobal';
 import { CloseOutlined, ExclamationCircleFilled } from '@ant-design/icons';
+import { deleteSchedule } from '../../apis/theater';
+import { MessageContextProvider } from '../../contexts/MessageContext';
+import { useNavigate } from 'react-router-dom';
 const { confirm } = Modal;
 
 interface IDetail {
     data: any
+    getSchedule: any
 }
 
-const showLogoutModal = () => {
-    confirm({
-        title: "Bạn có chắc muốn thoát đăng nhập  ",
-        icon: <ExclamationCircleFilled />,
-        okText: "Đăng xuất =((",
-        closeIcon: <CloseOutlined />,
-        cancelText: "Ở lại",
-        onOk() {
-            return new Promise(() => {
+const Detail: React.FC<IDetail> = ({ data, getSchedule }) => {
 
-            })
-            .then()
-        },
-        onCancel() { },
-    });
-};
+    const mess = useContext(MessageContextProvider)
+    const success = mess?.success
+    const error = mess?.error
 
-const Detail: React.FC<IDetail> = ({ data }) => {
+    const navigate = useNavigate()
+
+    const showLogoutModal = (id: number) => {
+        confirm({
+            title: "Bạn có chắc chắn muốn xóa???",
+            icon: <ExclamationCircleFilled />,
+            okText: "Xóa",
+            okType: 'danger',
+            closeIcon: <CloseOutlined />,
+            cancelText: "Hủy",
+            async onOk() {
+                try {
+                    const res = await deleteSchedule({ scheduleId: id });
+                    console.log(res)
+                    if (res?.code === 200) {
+                        getSchedule()
+                        success("Xoá thành công")
+                    }
+                    else {
+                        error(res?.msg)
+                    }
+                } catch (error) {
+                    console.log('', error);
+                }
+            },
+            onCancel() { },
+        });
+    };
 
     if (!data) return <></>
 
@@ -47,10 +67,21 @@ const Detail: React.FC<IDetail> = ({ data }) => {
             </div>
 
             <div className='right_Detail'>
-                <div><Button>Sửa</Button></div>
-                <div><Button>Xóa</Button></div>
+                <div>
+                    <Button
+                        onClick={() => { navigate(`/admin/movie-schedule/update/${data.schedule.id}`, {
+                            state: data
+                        }) }}
+                    >
+                        Sửa
+                    </Button>
+                </div>
+                <div><Button onClick={() => showLogoutModal(data.schedule.id)} danger>Xóa</Button></div>
                 <div>Còn lại: {`${data.availables}/${data.totalSeats}`}</div>
-                <div><Button>Xem vé đã đặt</Button></div>
+                <div><Button
+                 onClick={() => {
+                    navigate(`/admin/movie-schedule/view-all-booking/${data.schedule.id}`)
+                }}>Xem vé đã đặt</Button></div>
             </div>
         </div>
     )

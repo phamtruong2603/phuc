@@ -4,6 +4,11 @@ import { MenuItem } from "../types/MenuItem";
 
 export const listSidebarStaff: MenuItem[] = [
     {
+        titleSidebar: "Thống kê",
+        key: "statistical",
+        url: "statistical",
+    },
+    {
         titleSidebar: "Lịch chiếu phim",
         key: "movie-schedule",
         url: "movie-schedule",
@@ -27,11 +32,6 @@ export const listSidebarStaff: MenuItem[] = [
         titleSidebar: "Danh sách phòng",
         key: "room-list",
         url: "room-list",
-    },
-    {
-        titleSidebar: "Tạo phim",
-        key: "create-movies",
-        url: "create-movies",
     },
     {
         titleSidebar: "Danh  sách phim",

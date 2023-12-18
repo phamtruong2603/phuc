@@ -28,7 +28,6 @@ const Form = () => {
         e.preventDefault();
 
         const res = await login(data)
-        console.log(res)
         if (res?.code === 200) {
             setUserState?.({
                 isLogin: true,

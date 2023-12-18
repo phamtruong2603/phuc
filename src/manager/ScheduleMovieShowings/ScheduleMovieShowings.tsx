@@ -11,6 +11,7 @@ import { getRoomInCinema } from '../../apis/theater';
 import { AuthContextProvider } from '../../contexts/AuthContext';
 import { scheduleCreate } from '../../apis/theater';
 import { MessageContextProvider } from '../../contexts/MessageContext';
+import { useNavigate } from 'react-router-dom';
 
 dayjs.extend(customParseFormat);
 
@@ -32,6 +33,8 @@ const ScheduleMovieShowings = () => {
   const success = mess?.success
   const error = mess?.error
 
+  const navigate = useNavigate()
+
   const initialValues = {}
 
   const onFinish = async() => { 
@@ -43,6 +46,7 @@ const ScheduleMovieShowings = () => {
     const res = await scheduleCreate(data)
     if(res?.code === 200) {
       success("Thành công!!!!!!!!!!!!!!!!!!!!!")
+      navigate("/admin/movie-schedule")
     } else {
       error(res?.msg)
     }

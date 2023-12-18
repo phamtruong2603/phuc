@@ -4,7 +4,7 @@ import { useContext } from "react";
 
 const RefreshUrl = () => {
   const token = localStorage.getItem("token")
-  if (token) {
+  if (!token) {
     return <Navigate to="/login" />;
   }
   return <></>;

@@ -8,6 +8,9 @@ import AdminAccounts from './AdminAccounts/AdminAccounts';
 import GuestAccounts from './GuestAccounts/GuestAccounts';
 import CreateAccount from './CreateAccount/CreateAccount';
 import CreateTheater from './CreateTheater/CreateTheater';
+import MovieList from '../manager/MovieList/MovieList';
+import UpdateMovie from '../manager/MovieList/UpdateMovie';
+import CreateMovie from '../manager/CreateMovie/CreateMovie';
 
 const Admin = () => {
   return (
@@ -22,6 +25,11 @@ const Admin = () => {
             <Route path="/guest-accounts" element={<GuestAccounts />} />
             <Route path="/create-account" element={<CreateAccount />} />
             <Route path="/create-theater" element={<CreateTheater />} />
+
+            <Route path="/movie-list" element={<MovieList />} />
+            <Route path="/movie-list/update/:id" element={<UpdateMovie />} />
+
+            <Route path="/create-movies" element={<CreateMovie />} />
           </Routes>
         </div>
       </div>

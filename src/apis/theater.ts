@@ -81,3 +81,52 @@ export const roomInCinema = async (
 ) => {
     return await callApi<any>(`cinema-service/api/v1/room/room-in-cinema?cinemaId=${data.cinemaId}`, "post")
 }
+
+// schedule-service/api/v1/schedule/delete
+// gửi lên scheduleId
+// postmapping
+
+export const deleteSchedule = async(
+    data: {
+        scheduleId: number
+    }
+) => {
+    return await callApi<any>(`schedule-service/api/v1/schedule/delete?scheduleId=${data.scheduleId}`, "post")
+}
+
+// schedule-service/api/v1/schedule/get-by-id
+// truyền lên scheduleId
+export const getScheduleById = async(
+    data: {
+        scheduleId: number
+    }
+) => {
+    return await callApi<any>(`schedule-service/api/v1/schedule/get-by-id`, "get", data)
+}
+
+// schedule-service/api/v1/schedule/edit
+// private String startTime;
+//     private Integer filmId;
+//     private Integer roomId;
+// postmapping
+export const scheduleEdit = async (
+    data: {
+        id: number
+        startTime?: string,
+        filmId?: number,
+        roomId?: number
+    }
+) => {
+    return await callApi<any>(`schedule-service/api/v1/schedule/edit`, "post", data)
+}
+
+// schedule-service/api/v1/schedule/view-all-orders
+// gửi lên scheduleId
+// getmapping
+export const getAllOrders = async (
+    data: {
+        scheduleId: number
+    }
+) => {
+    return await callApi<any>(`schedule-service/api/v1/schedule/view-all-orders`, "get", data)
+}

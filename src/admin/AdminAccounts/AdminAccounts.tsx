@@ -18,8 +18,6 @@ const AdminAccounts = () => {
             email: value.user.email,
             address: value.user.address,
             blocked: value.user.blocked,
-            nameCinema: value.cinema.name
-
           })
         })
         setListAccount(newData)

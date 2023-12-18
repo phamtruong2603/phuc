@@ -14,6 +14,8 @@ import { AuthContext } from './contexts/AuthContext';
 import MessageContext from './contexts/MessageContext';
 import MoviesContext from './contexts/Movies';
 
+import ProtectedMain from './routes/ProtectedRoute';
+
 function App() {
   return (
     <div className="App">
@@ -21,12 +23,14 @@ function App() {
         <MessageContext>
           <MoviesContext>
             <Routes>
-              <Route path="super-admin/*" element={<Admin />} />
-              <Route path="admin/*" element={<Manager />} />
+              <Route element={<ProtectedMain />}>
+                <Route path="super-admin/*" element={<Admin />} />
+                <Route path="admin/*" element={<Manager />} />
+                <Route path="/not-found" element={<NotFound />} />
+              </Route>
+              <Route path="/*" element={<Web />} />
               <Route path="/login" element={<Form />} />
               <Route path="/register" element={<Register />} />
-              <Route path="/*" element={<Web />} />
-              <Route path="/not-found" element={<NotFound />} />
             </Routes>
           </MoviesContext>
         </MessageContext>

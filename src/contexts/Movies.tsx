@@ -29,6 +29,7 @@ const MoviesContext: React.FC<IMoviesContext> = ({ children }) => {
 
     const findCinema = async (userId: number) => {
         const res = await findCinemaByAdmin({ adminId: userId })
+        console.log(res)
         if (res?.code === 200) {
             setMovies({
                cinema: {
@@ -37,7 +38,7 @@ const MoviesContext: React.FC<IMoviesContext> = ({ children }) => {
                movies : []
             })
         } else {
-            console.log(".................")
+            console.log("undefined")
         }
     }
 

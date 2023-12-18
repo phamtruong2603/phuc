@@ -1,6 +1,7 @@
 import React, { ReactNode, createContext, useEffect, useState } from 'react';
 import { User } from '../types/user';
 import { loginByToken } from '../apis/auth';
+// import { useNavigate } from 'react-router-dom';
 
 interface IAuthContext {
     children: ReactNode;
@@ -28,7 +29,7 @@ export const AuthContext: React.FC<IAuthContext> = ({ children }) => {
         user: null,
         token: null,
     };
-
+    // const navigate = useNavigate()
     const [userState, setUserState] = useState<IUserState>(userStateDefault);
 
     const autoLogin = async () => {
@@ -41,6 +42,13 @@ export const AuthContext: React.FC<IAuthContext> = ({ children }) => {
                     token: res.data.token
                 })
                 localStorage.setItem('token', res.data.token)
+                // res.data.role.name === "SUPER_ADMIN" ?
+                // navigate('/super-admin/theater-list')
+                // :
+                // res.data.role.name === "ADMIN" ?
+                //     navigate('/admin/movie-schedule')
+                //     :
+                //     navigate('/')
             }
             else {
                 localStorage.removeItem("token");

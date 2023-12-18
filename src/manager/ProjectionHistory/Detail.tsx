@@ -1,16 +1,18 @@
 import React from 'react';
 import { Button, Image } from 'antd';
 import { converDate, converTime} from '../../components/FuctionGlobal';
+import { useNavigate } from 'react-router-dom';
 
 interface IDetail {
     data: any
 }
 
 const Detail: React.FC<IDetail> = ({data}) => {
+    const navigate = useNavigate()
+
     if(data.length === 0) return <></>
     
     const urlImg = data.schedule.film.thumnails[0].url
-
     return (
         <div className='Detail'>
             <div className='left_Detail'>
@@ -29,7 +31,11 @@ const Detail: React.FC<IDetail> = ({data}) => {
 
             <div className='right_Detail'>
                 <div>Còn lại: {`${data.availables}/${data.totalSeats}`}</div>
-                <div><Button>Xem vé đã đặt</Button></div>
+                <div><Button
+                     onClick={() => {
+                        navigate(`/admin/projection-history/view-all-booking/${data.schedule.id}`)
+                    }}
+                >Xem vé đã đặt</Button></div>
             </div>
         </div>
     )

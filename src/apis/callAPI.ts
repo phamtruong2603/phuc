@@ -25,7 +25,7 @@ export const callApi = async <T>(
             url: `${API_URL}/${URL}`,
             headers: {
                 'Content-Type': ContentType,
-                Authorization: `Bearer ${token}`,
+                Auth: `${token}`,
             },
         };
 

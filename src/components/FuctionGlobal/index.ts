@@ -27,9 +27,72 @@ export const converTime = (startTimeISO: string | any) => {
 export function converThumnails(arr: any[]): { [key: string]: any } {
     const result: { [key: string]: any } = {};
 
-    arr.forEach((value, index) => {
-        result[`thumnails[${index}]`] = value.originFileObj;
-    });
+    if (arr) {
+        arr.forEach((value, index) => {
+            if (value.originFileObj) {
+                result[`thumnails[${index}]`] = value.originFileObj;
+            }
+        });
+    }
 
     return result;
+}
+
+export const postingTime = (date: any) => {
+    let currentMin = (new Date()).getMinutes()
+    let currentHour = (new Date()).getHours()
+    let currentDay = (new Date()).getDate()
+    let currentMonth = (new Date()).getMonth()
+    let currentYear = (new Date()).getFullYear()
+
+    if (currentYear - date.getFullYear() <= 1) {
+        if (currentYear - date.getFullYear() < 1) {
+            if (currentMonth - date.getMonth() <= 1) {
+                if (currentMonth - date.getMonth() < 1) {
+                    if (currentDay - date.getDate() <= 1) {
+                        if (currentDay - date.getDate() < 1) {
+                            if (currentHour - date.getHours() <= 1) {
+                                if (currentHour - date.getHours() < 1) {
+                                    return `${currentMin - date.getMinutes()} phút trước`;
+                                } else {
+                                    if (currentMin + (60 - date.getMinutes()) > 60) {
+                                        return `${currentHour - date.getHours()} giờ trước`;
+                                    } else {
+                                        return `${currentMin + (60 - date.getMinutes())} phút trước`;
+                                    }
+                                }
+                            } else {
+                                return `${currentHour - date.getHours()} giờ trước`;
+                            }
+                        } else {
+                            if (currentHour + (24 - date.getHours()) > 24) {
+                                return `${currentDay - date.getDate()} ngày trước`;
+                            } else {
+                                return `${currentHour + (24 - date.getHours())} giờ trước`;
+                            }
+                        }
+                    } else {
+                        return `${currentDay - date.getDate()} ngày trước`;
+                    }
+                } else {
+                    if (currentDay + (30 - date.getDate()) > 30) {
+                        return `${currentMonth - date.getMonth()} tháng trước`;
+                    } else {
+                        return `${currentDay + (30 - date.getDate())} ngày trước`;
+                    }
+                }
+            } else {
+                return `${currentMonth - date.getMonth()} tháng trước`;
+            }
+        } else {
+            if (currentMonth + (12 - date.getMonth()) > 12) {
+                return `${currentYear - date.getFullYear()} năm trước`;
+            } else {
+                return `${currentMonth + (12 - date.getMonth())} tháng trước`;
+            }
+        }
+    } else {
+        return `${currentYear - date.getFullYear()} năm trước`;
+    }
+
 }

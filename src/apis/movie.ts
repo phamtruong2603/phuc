@@ -14,3 +14,41 @@ export const createMovies = async(
 export const getAllFilms = async() => {
     return await callApi<any>("film-service/api/v1/film", "get")
 }
+
+// film-service//api/v1/film/{id}
+// truyền lên id
+// gửi dạng pathVariable
+export const getFilmById = async(
+    data: {
+        id: number
+    }
+) => {
+    return await callApi<any>(`film-service/api/v1/film/${data.id}`, "post")
+}
+
+// film-service/api/v1/film/{id}
+// truyền lên  id
+// post
+// export const updateMovie = async(
+//     data: any
+// ) => {
+//     return await callApi<any>(`film-service/api/v1/film/${data.id}`, "post")
+// }
+
+export const updateMovie = async(
+    data: any
+) => {
+    return await callApi<any>(`film-service/api/v1/film/edit`, "post", data, 'multipart/form-data')
+}
+
+
+// film-service/api/v1/film/delete/{id}
+// postmapping
+export const deleteMovie = async(
+    data: {
+        id: number
+    }
+) => {
+    return await callApi<any>(`film-service/api/v1/film/delete/${data.id}`, "post")
+}
+

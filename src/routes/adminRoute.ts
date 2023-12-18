@@ -26,4 +26,14 @@ export const listSidebarAdmin: MenuItem[] = [
         key: "create-theater",
         url: "create-theater",
     },
+    {
+        titleSidebar: "Danh sách phim",
+        key: "movie-list",
+        url: "movie-list",
+    },
+    {
+        titleSidebar: "Tạo phim",
+        key: "create-movies",
+        url: "create-movies",
+    },
 ];
