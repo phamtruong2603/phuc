@@ -37,7 +37,7 @@ const HeaderWeb = () => {
             className='auth'
           >
 
-            <Link to="/a" className={`${urlCurrent === "a" ? "bottomCurrent" : ""}`}><span>Lịch chiếu</span></Link>
+            <Link to="/showtimes" className={`${urlCurrent === "showtimes" ? "bottomCurrent" : ""}`}><span>Lịch chiếu</span></Link>
             <Link to="/b" className={`${urlCurrent === "b" ? "bottomCurrent" : ""}`}><span>Phim chiếu</span></Link>
             <Link to="/c" className={`${urlCurrent === "c" ? "bottomCurrent" : ""}`}><span>Hồ sơ</span></Link>
 

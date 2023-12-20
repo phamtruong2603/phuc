@@ -1,0 +1,43 @@
+.Showtimes {
+    display: flex;
+    justify-content: space-between;
+    height: 90vh;
+    /* border-radius: 1rem;
+    box-shadow: 0 4px 8px rgba(61, 61, 242, 0.3);
+    box-sizing: border-box; */
+}
+
+.side_bar-Showtimes {
+    margin: 0.5rem 0;
+    padding-right: 1rem;
+    width: 20%;
+    height: calc(100% - 1rem);
+    overflow-y: scroll;
+}
+
+.side_bar-Showtimes::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rgb(221, 221, 221);
+    border-radius: 5px;
+}
+
+.side_bar-Showtimes::-webkit-scrollbar {
+    width: 3px;
+}
+
+.side_bar-Showtimes::-webkit-scrollbar-thumb {
+    background-color: #c1c1c1;
+    border-radius: 5px;
+}
+
+.name_theater-SideBar {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    /* margin: 0.5rem 0; */
+    /* font-weight: 600; */
+    border-bottom: 1px solid rgb(234, 234, 234);
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+/* ------------------------------------------------------------------------------------- */
