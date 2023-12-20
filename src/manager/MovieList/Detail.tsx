@@ -52,6 +52,9 @@ const Detail: React.FC<IDetail> = ({ data, getFilms }) => {
 
     if (!data) return <></>
 
+    const type = data.types.map((type: any) => type.name)
+    console.log(type)
+
     const urlImg = data.thumnails[0].url
     return (
         <div className='Detail'>
@@ -62,9 +65,9 @@ const Detail: React.FC<IDetail> = ({ data, getFilms }) => {
                 />
                 <div>
                     <span>Tên phim: {data.name}</span>
-                    <span>Thể loại: </span>
+                    <span>Thể loại: {type.map((value:any, index: number) => <>{value}{type.length-1 === index? "": ", "}</>)}</span>
                     <span>Mô tả: {data.description}</span>
-                    <span>Thời lượng: {data.duration}phút</span>
+                    <span>Thời lượng: {data.duration} phút</span>
                     <span>Ngày phát hành: {converDate(data.releaseDate)}</span>
                     <span style={{ alignItems: "center", display: "flex" }}>
                         Đánh giá: {data.score ? data.score : "Chưa có đánh giá"}

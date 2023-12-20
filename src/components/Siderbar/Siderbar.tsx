@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import './Siderbar.css'
 import { Layout, Menu, Modal, theme } from 'antd';
 
 import { listSidebarAdmin } from '../../routes/adminRoute';
@@ -78,15 +79,15 @@ const Siderbar = () => {
   }
 
   return (
-    <div className="siderbar">
+    <div style={{marginTop: "10vh"}}>
       <Layout>
         <Content >
           <Layout style={{ padding: '24px 0', background: colorBgContainer, height: '90vh' }}>
             <Sider style={{ background: colorBgContainer }} width={250}>
               <Menu
+              className='siderbar'
                 // theme="dark"
                 mode="inline"
-                // defaultSelectedKeys={['1']}
                 defaultOpenKeys={['user-management']}
                 style={{ height: '100%' }}
                 onClick={findItem}

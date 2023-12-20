@@ -23,7 +23,8 @@ const TheaterList = () => {
   }, [])
 
   return (
-    <div>
+    <div className='MovieSchedule'>
+      <header>Danh sách rạp</header>
         <TableTheaterList dataSource={listTheater} />
     </div>
   )

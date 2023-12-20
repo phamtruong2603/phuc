@@ -5,25 +5,28 @@ import { findAllCustomersAccount } from '../../apis/user';
 const GuestAccounts = () => {
   const [listAccount, setListAccount] = useState<any>()
 
-  useEffect(() => {
-    (async() => {
-      const res = await findAllCustomersAccount()
-      console.log(res)
-      if(res?.code === 200) {
-        const newData = res.data.map((value: any, index: number) => {
-          return({
-            key: index,
-            ...value
+  const getAccount = async () => {
+    const res = await findAllCustomersAccount()
+    console.log(res)
+    if (res?.code === 200) {
+      const newData = res.data.map((value: any, index: number) => {
+        return ({
+          key: index,
+          ...value
 
-          })
         })
-        setListAccount(newData)
-      }
-    })()
+      })
+      setListAccount(newData)
+    }
+  }
+
+  useEffect(() => {
+    getAccount()
   }, [])
   return (
-    <div>
-        <TableGuestAccounts dataSource={listAccount} />
+    <div className='MovieSchedule'>
+      <header>Danh sách tài khoản khách</header>
+      <TableGuestAccounts dataSource={listAccount} getAccount={getAccount} />
     </div>
   )
 }

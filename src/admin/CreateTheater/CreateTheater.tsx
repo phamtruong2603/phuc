@@ -45,7 +45,8 @@ const CreateTheater = () => {
      };
 
     return (
-        <div>
+        <div className='MovieSchedule'>
+            <header>Tạo mới rạp</header>
             <Form
                 name="basic"
                 labelCol={{ span: 8 }}

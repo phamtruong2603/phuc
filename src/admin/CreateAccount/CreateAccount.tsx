@@ -41,6 +41,8 @@ const CreateAccount = () => {
   };
 
   return (
+    <div className='MovieSchedule'>
+      <header>Tạo mới tài khoản admin</header>
     <Form
       name="basic"
       labelCol={{ span: 8 }}
@@ -108,6 +110,7 @@ const CreateAccount = () => {
         </Button>
       </Form.Item>
     </Form>
+    </div>
   )
 }
 

@@ -59,6 +59,7 @@ const CreateRoom = () => {
                 <Form.Item<FieldType>
                     label="Tên phòng"
                     name="name"
+                    rules={[{ required: true, message: 'Không được để trống!' }]}
                 >
                     <Input />
                 </Form.Item>
@@ -66,6 +67,7 @@ const CreateRoom = () => {
                 <Form.Item<FieldType>
                     label="Số hàng ghế"
                     name="verticalSeats"
+                    rules={[{ required: true, message: 'Không được để trống!' }]}
                 >
                     <InputNumber
                         style={{ width: "100%" }}
@@ -75,6 +77,7 @@ const CreateRoom = () => {
                 <Form.Item<FieldType>
                     label="Số chỗ mỗi hàng"
                     name="horizontalSeats"
+                    rules={[{ required: true, message: 'Không được để trống!' }]}
                 >
                     <InputNumber
                         style={{ width: "100%" }}

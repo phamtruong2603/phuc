@@ -6,28 +6,34 @@ const AdminAccounts = () => {
 
   const [listAccount, setListAccount] = useState<any>()
 
-  useEffect(() => {
-    (async() => {
-      const res = await findAllAdminAccount()
-      if(res?.code === 200) {
-        const newData = res.data.map((value: any, index: number) => {
-          return({
-            key: index,
-            name: value.user.fullname,
-            username: value.user.username,
-            email: value.user.email,
-            address: value.user.address,
-            blocked: value.user.blocked,
-          })
+  const getAccount = async () => {
+    const res = await findAllAdminAccount()
+    if (res?.code === 200) {
+      const newData = res.data.map((value: any, index: number) => {
+        console.log(value)
+        return ({
+          id: value.user.id,
+          key: index,
+          name: value.user.fullname,
+          username: value.user.username,
+          email: value.user.email,
+          address: value.user.address,
+          blocked: value.user.blocked,
+          nameCinema: value.cinema?.name
         })
-        setListAccount(newData)
-      }
-    })()
+      })
+      setListAccount(newData)
+    }
+  }
+
+  useEffect(() => {
+    getAccount()
   }, [])
 
   return (
-    <div>
-        <TableAdminAccounts dataSource={listAccount} />
+    <div className='MovieSchedule'>
+      <header>Danh sách tài khoản admin</header>
+      <TableAdminAccounts dataSource={listAccount} getAccount={getAccount} />
     </div>
   )
 }

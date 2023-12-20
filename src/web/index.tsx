@@ -1,18 +1,14 @@
 import React from 'react';
-// import { Route, Routes } from 'react-router-dom';
-// import NavigateNotFound from '../components/NotFound/NavigateNotFound';
-// import HeaderWeb from '../components/Header/HeaderWeb';
-
-// import UploadImage from '../components/UploadImage/UploadImage';
-import UpdateInfor from '../components/PersonalInformation/UpdateInfor';
+import HeaderWeb from '../components/Header/HeaderWeb';
+import Showtimes from './Showtimes';
 
 const Web = () => {
   return (
     <div className='web'>
-      {/* <HeaderWeb /> */}
-
-      <UpdateInfor />
-      
+      <HeaderWeb />
+      <div className='content-web' style={{paddingTop: "10vh"}}>
+        <Showtimes />
+      </div>
     </div>
   )
 }

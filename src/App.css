@@ -4,13 +4,10 @@
     width: 100wh;
 }
 
-.web {
-    width: 100wh;
-}
-
 .content {
+    padding: 10vh 1rem 0 1rem;
     flex: 1 !important;
-    padding: 1rem;
+    /* padding: 1rem; */
 }
 
 .title-layout {
@@ -40,4 +37,18 @@ a {
     font-size: 1.2rem;
     margin: 1rem 0;
     font-weight: bold;
+}
+
+.blocked_TableAdminAccounts > div{
+    /* width: 250px; */
+    display: flex;
+    justify-content: space-between;
+}
+
+.blocked_TableAdminAccounts button{
+   width: 80px;
+}
+
+.content-web {
+    padding: 0 2rem;
 }

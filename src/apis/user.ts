@@ -62,3 +62,12 @@ export const changePassword = async (
 ) => {
     return await callApi<any>(`account-service/api/v1/auth/change-password`, "get", data)
 }
+
+// account-service/api/v1/sp-admin/change-status
+export const changeStatus = async (
+    data: {
+        id: number
+    }
+) => {
+    return await callApi<any>(`account-service/api/v1/sp-admin/change-status?id=${data.id}`, "post")
+}
