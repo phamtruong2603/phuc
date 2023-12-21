@@ -11,6 +11,7 @@ import CreateTheater from './CreateTheater/CreateTheater';
 import MovieList from '../manager/MovieList/MovieList';
 import UpdateMovie from '../manager/MovieList/UpdateMovie';
 import CreateMovie from '../manager/CreateMovie/CreateMovie';
+import UpdateInfor from '../components/PersonalInformation/UpdateInfor';
 
 const Admin = () => {
   return (
@@ -30,6 +31,8 @@ const Admin = () => {
             <Route path="/movie-list/update/:id" element={<UpdateMovie />} />
 
             <Route path="/create-movies" element={<CreateMovie />} />
+            
+            <Route path="/update-information" element={<UpdateInfor />} />
           </Routes>
         </div>
       </div>

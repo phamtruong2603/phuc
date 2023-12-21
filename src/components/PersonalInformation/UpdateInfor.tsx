@@ -96,7 +96,7 @@ const UpdateInfor = () => {
                     labelWrap
                     wrapperCol={{ flex: 1 }}
                     colon={false}
-                    style={{ maxWidth: 700 }}
+                    style={{ maxWidth: 700, margin:"2rem auto" }}
                     onFinish={updateInformation}
                     initialValues={initialValues}
                 >
@@ -148,7 +148,7 @@ const UpdateInfor = () => {
                         labelWrap
                         wrapperCol={{ flex: 1 }}
                         colon={false}
-                        style={{ maxWidth: 700 }}
+                        style={{ maxWidth: 700, margin:"2rem auto" }}
                         onFinish={onChangPassword}
                         initialValues={initialValues}
                     >

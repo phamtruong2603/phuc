@@ -1,18 +1,58 @@
+import { useContext } from 'react';
 import './Header.css';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { AuthContextProvider } from '../../contexts/AuthContext';
-import { useContext } from 'react';
+import { Button, Dropdown, MenuProps, Modal, Space } from 'antd';
+import { CloseOutlined, ExclamationCircleFilled } from '@ant-design/icons';
+import Avatar from '../Avatar/Avatar';
+
+const { confirm } = Modal;
 
 const Header = () => {
   const auth = useContext(AuthContextProvider)
   const user = auth?.userState
   const navigate = useNavigate();
 
+  console.log(user?.user?.role.name)
+
   const navigateLoginForm = (e: any) => {
     e.preventDefault();
     navigate('/login')
   };
+
+  const showLogoutModal = () => {
+    confirm({
+      title: "Bạn có chắc chắn đăng xuất???",
+      icon: <ExclamationCircleFilled />,
+      okText: "Đăng xuất",
+      // okType: 'danger',
+      closeIcon: <CloseOutlined />,
+      cancelText: "Ở lại",
+      onOk() {
+        auth?.logout()
+        navigate('/login')
+      },
+      onCancel() { },
+    });
+  };
+
+  const url_information = user?.user?.role.name === "ADMIN" ? "/admin/update-information" : "/super-admin/update-information"
+
+  const items: MenuProps['items'] = [
+    {
+      key: '3',
+      label: (
+        <Link to={url_information}>{`Thông tin cá nhân -->`}</Link>
+      ),
+    },
+    {
+      key: '',
+      label: (
+        <Button onClick={showLogoutModal}>Đăng xuất</Button>
+      ),
+    },
+  ];
 
   return (
     <div className='header'>
@@ -27,13 +67,15 @@ const Header = () => {
             style={{ fontSize: '1.2rem', display: "flex", alignItems: 'center' }}
             className='auth'
           >
-            Xin chào {user.user?.username}
-            <span onClick={
-              () => {
-                auth?.logout()
-                navigate('/login')
-              }
-            }>Logout</span>
+            <p className='name_header'> Xin chào {user.user?.username}</p>
+            <Dropdown
+              menu={{ items }}
+              trigger={["click"]}
+            >
+              <Space>
+                <Avatar width='50px' />
+              </Space>
+            </Dropdown>
           </div>
           :
           <div className='auth'>

@@ -13,6 +13,7 @@ import RoomList from "./RoomList/RoomList";
 import CreateMovie from "./CreateMovie/CreateMovie";
 import MovieList from "./MovieList/MovieList";
 import Reviews from "./MovieList/Reviews";
+import UpdateInfor from "../components/PersonalInformation/UpdateInfor";
 
 const Manager = () => {
   return (
@@ -41,6 +42,8 @@ const Manager = () => {
 
             <Route path="/movie-list" element={<MovieList />} />
             <Route path="/movie-list/:id" element={<Reviews />} />
+            
+            <Route path="/update-information" element={<UpdateInfor />} />
 
           </Routes>
         </div>

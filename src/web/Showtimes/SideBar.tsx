@@ -1,37 +1,23 @@
-import React from 'react';
+import { useNavigate } from "react-router-dom"
 
-const data = [
-  'lote a',
-  'lote a',
-  'lote a',
-  'lote a',
-  'lote a',
-  'lote a',
-  'lote a',
-  'lote a',
-  'lote a',
-  'lote a',
-  'lote a',
-  'lote a',
-  'lote a',
-  'lote a',
-  'lote a',
-  'lote a',
-  'lote a',
-  'lote a',
-  'lote a',
-  'lote a',
-  'lote a',
-  'lote a',
-]
+interface ISideBar {
+  listTheater: any
+  setTheater: any
+}
 
-const SideBar = () => {
+const SideBar: React.FC<ISideBar> = ({ listTheater, setTheater }) => {
+  const navigate = useNavigate()
   return (
     <div className='SideBar-Showtimes'>
-      {data.map((value: any, index: number) => {
-        return(
-          <div className='name_theater-SideBar'>
-            {value}
+      {listTheater && listTheater.map((value: any, index: number) => {
+        return (
+          <div className='name_theater-SideBar' key={index}
+            onClick={() => {
+              setTheater(value)
+              navigate(`/showtimes/${value.id}`)
+            }}
+          >
+            {value.name}
             <span>{`>`}</span>
           </div>
         )

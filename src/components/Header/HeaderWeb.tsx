@@ -1,8 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
 import './Header.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import DropdowHeader from './DropdowHeader';
 import { AuthContextProvider } from '../../contexts/AuthContext';
+import { Button, Dropdown, MenuProps, Modal, Space } from 'antd';
+import Avatar from '../Avatar/Avatar';
+import { CloseOutlined, ExclamationCircleFilled } from '@ant-design/icons';
+
+const { confirm } = Modal;
 
 const HeaderWeb = () => {
 
@@ -18,6 +22,38 @@ const HeaderWeb = () => {
     navigate('/login')
   };
 
+  const showLogoutModal = () => {
+    confirm({
+      title: "Bạn có chắc chắn đăng xuất???",
+      icon: <ExclamationCircleFilled />,
+      okText: "Đăng xuất",
+      // okType: 'danger',
+      closeIcon: <CloseOutlined />,
+      cancelText: "Ở lại",
+      onOk() {
+        auth?.logout()
+        navigate('/login')
+      },
+      onCancel() { },
+    });
+  };
+
+
+  const items: MenuProps['items'] = [
+    {
+      key: '3',
+      label: (
+        <Link to="/update-information">{`Thông tin cá nhân -->`}</Link>
+      ),
+    },
+    {
+      key: '',
+      label: (
+        <Button onClick={showLogoutModal}>Đăng xuất</Button>
+      ),
+    },
+  ];
+
   useEffect(() => {
     const checkUrl = location.pathname.split("/")[1]
     setUrlCurrent(checkUrl)
@@ -31,7 +67,7 @@ const HeaderWeb = () => {
 
         </div>
 
-        {!user?.isLogin ?
+        {user?.isLogin ?
           <div
             style={{ fontSize: '1.2rem', display: "flex", alignItems: 'center' }}
             className='auth'
@@ -39,11 +75,18 @@ const HeaderWeb = () => {
 
             <Link to="/showtimes" className={`${urlCurrent === "showtimes" ? "bottomCurrent" : ""}`}><span>Lịch chiếu</span></Link>
             <Link to="/b" className={`${urlCurrent === "b" ? "bottomCurrent" : ""}`}><span>Phim chiếu</span></Link>
-            <Link to="/c" className={`${urlCurrent === "c" ? "bottomCurrent" : ""}`}><span>Hồ sơ</span></Link>
+            <Link to="/update-information" className={`${urlCurrent === "update-information" ? "bottomCurrent" : ""}`}><span>Hồ sơ</span></Link>
 
-            {/* <span> Xin chào {user.user?.username}</span> */}
-            <p className='name_header'> Xin chào ABC</p>
-            <DropdowHeader />
+            <p className='name_header'> Xin chào {user.user?.username}</p>
+
+            <Dropdown
+              menu={{ items }}
+              trigger={["click"]}
+            >
+              <Space>
+                <Avatar width='50px' />
+              </Space>
+            </Dropdown>
           </div>
           :
           <div className='auth'>

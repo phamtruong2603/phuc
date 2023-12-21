@@ -5,7 +5,9 @@ import './App.css';
 import Admin from './admin';
 import Manager from './manager';
 import Web from './web';
+import DashBoard from './web/DashBoard';
 import Showtimes from './web/Showtimes';
+import ChooseSeats from './web/ChooseSeats/ChooseSeats';
 import Form from './components/FormLogin';
 import Register from './components/FormLogin/Register';
 import NotFound from './components/NotFound';
@@ -16,7 +18,6 @@ import MessageContext from './contexts/MessageContext';
 import MoviesContext from './contexts/Movies';
 
 import ProtectedMain from './routes/ProtectedRoute';
-import UpdateInfor from './components/PersonalInformation/UpdateInfor';
 
 function App() {
   return (
@@ -28,11 +29,14 @@ function App() {
               <Route element={<ProtectedMain />}>
                 <Route path="super-admin/*" element={<Admin />} />
                 <Route path="admin/*" element={<Manager />} />
-                <Route path="/update-information" element={<UpdateInfor />} />
+                <Route path="/update-information" element={<DashBoard />} />
                 <Route path="/not-found" element={<NotFound />} />
               </Route>
               <Route path="/" element={<Web />} />
               <Route path="/showtimes" element={<Showtimes />} />
+              <Route path="/showtimes/:id" element={<Showtimes />} />
+              <Route path="/showtimes/:id/choose-seats/:scheduleId" element={<ChooseSeats />} />
+              {/* choose-seats */}
               <Route path="/login" element={<Form />} />
               <Route path="/register" element={<Register />} />
               <Route path='*' element={<NotFound />} />

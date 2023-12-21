@@ -16,7 +16,7 @@ const ProtectedMain = () => {
   const user = auth?.userState
   const login = user?.isLogin
 
-  return login ? <RefreshUrl /> : <Outlet />;
+  return !login ? <RefreshUrl /> : <Outlet />;
 };
 
 export default ProtectedMain;

@@ -96,3 +96,26 @@ export const postingTime = (date: any) => {
     }
 
 }
+
+export function formatVNDCurrency(value: number) {
+    const formatter = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+    });
+
+    return formatter.format(value);
+}
+
+export function formatVNDCurrency1(value: number): string {
+    const formatter = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+    });
+
+    const formattedValue = formatter.format(value);
+
+    // Remove the currency symbol ₫ and replace it with VND
+    const formattedResult = formattedValue.replace(/₫/g, 'VND');
+
+    return formattedResult;
+}

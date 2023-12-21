@@ -6,7 +6,6 @@ const Web = () => {
     <div className='web'>
       <HeaderWeb />
       <div className='content-web'>
-        home
       </div>
     </div>
   )

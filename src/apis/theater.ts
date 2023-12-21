@@ -130,3 +130,26 @@ export const getAllOrders = async (
 ) => {
     return await callApi<any>(`schedule-service/api/v1/schedule/view-all-orders`, "get", data)
 }
+
+// schedule-service/api/v1/schedule/cinema-by-day
+// truyền lên: Integer cinemaId, String date
+// postMapping
+export const cinemaByDay = async (
+    data: {
+        cinemaId: number,
+        date: string
+    }
+) => {
+    return await callApi<any>(`schedule-service/api/v1/schedule/cinema-by-day?cinemaId=${data.cinemaId}&date=${data.date}`, "post")
+}
+
+// schedule-service//api/v1/schedule/get-seats-status
+// gửi lên scheduleId
+// getmapping
+export const getSeatsStatus = async (
+    data: {
+        scheduleId: number
+    }
+) => {
+    return await callApi<any>(`schedule-service//api/v1/schedule/get-seats-status`, "get", data)
+}
