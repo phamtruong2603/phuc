@@ -6,18 +6,31 @@ import { Button } from 'antd'
 import { useParams } from 'react-router-dom';
 import { getSeatsStatus } from '../../apis/theater';
 import { converDate, converTime, formatVNDCurrency } from '../../components/FuctionGlobal';
+import ConfirmBook from './ConfirmBook';
+import { createPayment } from '../../apis/payment';
 
 const ChooseSeats = () => {
 
-  const [tickets, setTickets] = useState<any>()
-
-  const [checkActive, setCheckActive] = useState<string[]>([])
-
   const { scheduleId } = useParams()
 
-  const confirmBook = () => { }
+  const [tickets, setTickets] = useState<any>()
+  const [checkActive, setCheckActive] = useState<string[]>([])
+
+  const [open, setOpen] = useState(false);
+
+  const [dataTable, setDataTable] = useState<any>([])
+  const [url, setUrl] = useState<string>("");
 
   let sumPrice = 0
+
+  const confirmBook = async () => {
+    const res = await createPayment({ amount: sumPrice })
+    if(res?.code === 200) {
+      setUrl(res.data.redirect_url)
+    }
+    setOpen(true)
+  }
+
 
   for (const element of checkActive) {
     if (Number(element.split("-")[0]) < 5) {
@@ -26,6 +39,33 @@ const ChooseSeats = () => {
       sumPrice += 80000
     }
   }
+  useEffect(() => {
+    let key = 0
+    let newData = []
+    for (const element of checkActive) {
+      if (Number(element.split("-")[0]) < 5) {
+        newData.push(
+          {
+            key: key,
+            chair: element,
+            type: "ghế thường",
+            price: "50.000VND"
+          }
+        )
+      } else {
+        newData.push(
+          {
+            chair: element,
+            type: "ghế VIP",
+            price: "80.000VND"
+          }
+        )
+      }
+      key ++
+    }
+    setDataTable(newData)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [checkActive])
 
   useEffect(() => {
     if (scheduleId) {
@@ -64,7 +104,7 @@ const ChooseSeats = () => {
                 &nbsp;{`-`}&nbsp;{converDate(tickets.schedule.startTime)}
               </p>
               <p>Ghế:
-                {checkActive.map((value: string, index: number) => <>{`${index !== 0 ? ", " : " "}${value}`}</>)}
+                {checkActive.map((value: string, index: number) => <span key={index}>{`${index !== 0 ? ", " : " "}${value}`}</span>)}
               </p>
             </div>
             <div>Tổng tiền: {formatVNDCurrency(sumPrice)}</div>
@@ -72,6 +112,15 @@ const ChooseSeats = () => {
           </div>
         </div>
       }
+
+      {open &&
+        <ConfirmBook
+          open={open}
+          setOpen={setOpen}
+          dataTable={dataTable}
+          sumPrice={sumPrice}
+          url={url}
+        />}
     </div>
   )
 }
