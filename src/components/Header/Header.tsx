@@ -78,7 +78,7 @@ const Header = () => {
           :
           <div className='auth'>
             <span onClick={navigateLoginForm}>Đăng nhập</span>
-            <span>Đăng ký</span>
+            <span onClick={() => {navigate("/register")}}>Đăng ký</span>
           </div>
         }
 

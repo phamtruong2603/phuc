@@ -21,6 +21,7 @@ import MoviesContext from './contexts/Movies';
 
 import ProtectedMain from './routes/ProtectedRoute';
 import DetailMovie from './web/MovieList/DetailMovie';
+import BookingHistory from './web/BookingHistory';
 
 function App() {
   return (
@@ -35,17 +36,16 @@ function App() {
                 <Route path="/update-information" element={<DashBoard />} />
                 <Route path="/not-found" element={<NotFound />} />
                 <Route path="/showtimes/:id/choose-seats/:scheduleId" element={<ChooseSeats />} />
-                <Route path="/movie-list" element={<MovieListWeb />} />
-                <Route path="/movie-list/:id" element={<DetailMovie />} />
                 <Route path="/payment-success/*" element={<PaymentSuccess />} />
               </Route>
               <Route path="/" element={<Web />} />
               <Route path="/showtimes" element={<Showtimes />} />
               <Route path="/showtimes/:id" element={<Showtimes />} />
-
-
+              <Route path="/movie-list" element={<MovieListWeb />} />
+              <Route path="/movie-list/:id" element={<DetailMovie />} />
               <Route path="/login" element={<Form />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/booking-history" element={<BookingHistory />} />
               <Route path='*' element={<NotFound />} />
             </Routes>
           </MoviesContext>

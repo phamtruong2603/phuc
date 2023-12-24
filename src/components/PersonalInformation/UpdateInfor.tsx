@@ -19,12 +19,14 @@ const UpdateInfor = () => {
 
     const navigate = useNavigate()
 
-    const dateFormat = "YYYY-MM-DD";
+    const dateFormat = "YYYY-MM-DD" // YYYY/MM/DD;
     const [changeDisplay, setChangeDisplay] = useState<boolean>(true)
+
+    const checkDateOfBrith = user?.dateOfBirth?.replace("/", '-')
 
     const initialValues = {
         ...user,
-        dateOfBrith: dayjs(user?.dateOfBirth),
+        dateOfBrith: checkDateOfBrith ? dayjs(checkDateOfBrith) : "",
         password: ""
     };
 
@@ -49,7 +51,6 @@ const UpdateInfor = () => {
             const res = await editAcount(data)
             if (res?.code === 200) {
                 success("Thay đổi thông tin thành công")
-                console.log(res.data)
                 setUserState?.({
                     isLogin: true,
                     user: res.data,

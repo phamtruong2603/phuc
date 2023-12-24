@@ -53,7 +53,7 @@ const Detail: React.FC<IDetail> = ({ data, getFilms }) => {
 
     const type = data.types.map((type: any) => type.name)
 
-    const urlImg = data.thumnails[0].url
+    const urlImg = data.thumnails[0]?.url ? data.thumnails[0]?.url : ""
     return (
         <div className='Detail'>
             <div className='left_Detail'>
@@ -63,7 +63,7 @@ const Detail: React.FC<IDetail> = ({ data, getFilms }) => {
                 />
                 <div>
                     <span>Tên phim: {data.name}</span>
-                    <span>Thể loại: {type.map((value:any, index: number) => <>{value}{type.length-1 === index? "": ", "}</>)}</span>
+                    <span>Thể loại: {type.map((value: any, index: number) => <>{value}{type.length - 1 === index ? "" : ", "}</>)}</span>
                     <span>Mô tả: {data.description}</span>
                     <span>Thời lượng: {data.duration} phút</span>
                     <span>Ngày phát hành: {converDate(data.releaseDate)}</span>
@@ -85,7 +85,7 @@ const Detail: React.FC<IDetail> = ({ data, getFilms }) => {
                         user && user.role.name === "SUPER_ADMIN" ?
                             <>
                                 <Button
-                                    onClick={() =>{
+                                    onClick={() => {
                                         navigate(`/super-admin/movie-list/update/${data.id}`)
                                     }}
                                 >Sửa</Button><br /><br />
@@ -101,7 +101,7 @@ const Detail: React.FC<IDetail> = ({ data, getFilms }) => {
 
                     <Button
                         onClick={() => {
-                            navigate(`${user?.role.name === "ADMIN"? `${`/admin/movie-list/${data.id}`}`: `${`/movie-list/${data.id}`}`}`)
+                            navigate(`${user?.role.name === "ADMIN" ? `${`/admin/movie-list/${data.id}`}` : user?.role.name === "SUPER_ADMIN" ? `${`/super-admin/movie-list/${data.id}`}` : `${`/movie-list/${data.id}`}`}`)
                         }}>Xem chi tiết
                     </Button>
                 </div>

@@ -6,43 +6,48 @@ import { register } from '../../apis/auth';
 interface IFormRegister {
     email: string | undefined
     password: string | undefined
-    avatar: string,
-    first_name: string,
-    last_name: string,
-    mobile: string,
-    sex: string,
-    cmnd: string,
-    role: string,
-    address: string,
+    phone: string | undefined,
+    role: string | undefined,
+    address: string | undefined,
+    fullname: string | undefined,
+    dateOfBirth: string | undefined,
+    username: string | undefined,
 }
 
 const Register = () => {
 
     const message = useContext(MessageContextProvider);
     const success = message?.success
+    const error = message?.error
+    const warning = message?.warning
 
     const [data, setData] = useState<IFormRegister>({
-        avatar: "",
-        first_name: "",
-        last_name: "",
-        mobile: "",
-        sex: "",
-        cmnd: "",
-        role: "user",
-        address: "",
         email: undefined,
-        password: undefined
+        phone: undefined,
+        role: "CUSTOMER",
+        address: undefined,
+        password: undefined,
+        dateOfBirth: undefined,
+        fullname: undefined,
+        username: undefined
     })
     const navigate = useNavigate()
 
     const submitFormLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const res = await register(data)
-        if (res?.status === "404") {
-            success("Tài khoản đã tồn tại!!!")
+
+        const { email, phone, address, password, dateOfBirth, fullname, username } = data
+        if (!email || !phone || !address || !password ||
+            !dateOfBirth || !fullname || !username) {
+            warning('Vui lòng nhập đầy đủ thông tin ạ...')
         } else {
-            success("Thành công!!!")
-            navigate("/login")
+            const res = await register(data)
+            if (res?.code === 200) {
+                success("Thành công!!!")
+                navigate("/login")
+            } else {
+                error(res?.msg)
+            }
         }
     };
 
@@ -61,8 +66,7 @@ const Register = () => {
     return (
         <div className='Form'>
             <div>
-
-                <div className='login-form'>
+                <div className='register-form'>
                     <h1 onClick={navigateHome}>LOGO</h1>
                     <form onSubmit={submitFormLogin}>
                         <div>
@@ -76,6 +80,57 @@ const Register = () => {
                             />
                         </div>
                         <div>
+                            <label htmlFor="fullname">Họ và tên:</label>
+                            <input
+                                id='fullname'
+                                type="text"
+                                name='fullname'
+                                placeholder='typing...'
+                                onChange={changeInfor}
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor="dateOfBirth">Ngày sinh:</label>
+                            <input
+                                id='dateOfBirth'
+                                type="date"
+                                name='dateOfBirth'
+                                placeholder=''
+                                onChange={changeInfor}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="address">Địa chỉ:</label>
+                            <input
+                                id='address'
+                                type="text"
+                                name='address'
+                                placeholder='address'
+                                onChange={changeInfor}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="phone">Điện thoại:</label>
+                            <input
+                                id='phone'
+                                type="text"
+                                name='phone'
+                                placeholder='phone'
+                                onChange={changeInfor}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="username">Username:</label>
+                            <input
+                                id='username'
+                                type="text"
+                                name='username'
+                                placeholder='username'
+                                onChange={changeInfor}
+                            />
+                        </div>
+                        <div>
                             <label htmlFor="password">Password:</label>
                             <input
                                 id='password'
@@ -85,6 +140,7 @@ const Register = () => {
                                 onChange={changeInfor}
                             />
                         </div>
+
                         <br />
                         <br />
                         <button>Đăng Ký</button>

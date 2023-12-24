@@ -41,13 +41,19 @@ const HeaderWeb = () => {
 
   const items: MenuProps['items'] = [
     {
-      key: '3',
+      key: '1',
       label: (
         <Link to="/update-information">{`Thông tin cá nhân -->`}</Link>
       ),
     },
     {
-      key: '',
+      key: '2',
+      label: (
+        <Link to="/booking-history">{`Lịch sử đặt vé -->`}</Link>
+      ),
+    },
+    {
+      key: '3',
       label: (
         <Button onClick={showLogoutModal}>Đăng xuất</Button>
       ),
@@ -73,9 +79,9 @@ const HeaderWeb = () => {
             className='auth'
           >
 
+            <Link to="/" className={`${urlCurrent === "" ? "bottomCurrent" : ""}`}><span>Trang chủ</span></Link>
             <Link to="/showtimes" className={`${urlCurrent === "showtimes" ? "bottomCurrent" : ""}`}><span>Lịch chiếu</span></Link>
             <Link to="/movie-list" className={`${urlCurrent === "movie-list" ? "bottomCurrent" : ""}`}><span>Phim chiếu</span></Link>
-            <Link to="/update-information" className={`${urlCurrent === "update-information" ? "bottomCurrent" : ""}`}><span>Lịch sử đặt vé</span></Link>
 
             <p className='name_header'> Xin chào {user.user?.username}</p>
 
@@ -90,8 +96,14 @@ const HeaderWeb = () => {
           </div>
           :
           <div className='auth'>
+
+            <Link to="/" className={`${urlCurrent === "" ? "bottomCurrent" : ""}`}><span>Trang chủ</span></Link>
+            <Link to="/showtimes" className={`${urlCurrent === "showtimes" ? "bottomCurrent" : ""}`}><span>Lịch chiếu</span></Link>
+            <Link to="/movie-list" className={`${urlCurrent === "movie-list" ? "bottomCurrent" : ""}`}><span>Phim chiếu</span></Link>
+
+
             <button onClick={navigateLoginForm}>Đăng nhập</button>
-            <button>Đăng ký</button>
+            <button onClick={() => {navigate("/register")}}>Đăng ký</button>
           </div>
         }
 

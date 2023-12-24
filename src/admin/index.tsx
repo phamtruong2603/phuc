@@ -12,6 +12,7 @@ import MovieList from '../manager/MovieList/MovieList';
 import UpdateMovie from '../manager/MovieList/UpdateMovie';
 import CreateMovie from '../manager/CreateMovie/CreateMovie';
 import UpdateInfor from '../components/PersonalInformation/UpdateInfor';
+import Reviews from '../manager/MovieList/Reviews';
 
 const Admin = () => {
   return (
@@ -28,6 +29,7 @@ const Admin = () => {
             <Route path="/create-theater" element={<CreateTheater />} />
 
             <Route path="/movie-list" element={<MovieList />} />
+            <Route path="/movie-list/:id" element={<Reviews />} />
             <Route path="/movie-list/update/:id" element={<UpdateMovie />} />
 
             <Route path="/create-movies" element={<CreateMovie />} />
