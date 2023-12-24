@@ -35,20 +35,28 @@ const MovieSchedule = () => {
             getSchedule()
         }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [movies])
 
     return (
         <div className='MovieSchedule'>
             <header>Lịch đang chiếu</header>
-            {schedule.map((value: any, index: number) => {
-                return (
-                    <Detail
-                        data={value}
-                        getSchedule={getSchedule}
-                    />
-                )
-            })}
+            {!schedule.length ?
+                <div className='not-data'>
+                    {/* <img src="https://res.cloudinary.com/dbduzdrla/image/upload/v1703320851/phuc/file-and-folder_vbd8uh.png" alt="" /> */}
+                    <img src="https://res.cloudinary.com/dbduzdrla/image/upload/v1703320851/phuc/empty-box_n5egmb.png" alt="" />
+                    Hiện đang không có lịch chiếu 
+                </div>
+                :
+                schedule.map((value: any, index: number) => {
+                    return (
+                        <Detail
+                            data={value}
+                            getSchedule={getSchedule}
+                        />
+                    )
+                })
+            }
         </div>
     )
 }

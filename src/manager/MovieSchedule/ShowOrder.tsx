@@ -13,6 +13,7 @@ const ShowOrder = () => {
         if (id) {
             (async () => {
                 const res = await getAllOrders({scheduleId: Number(id)})
+                console.log(res)
                 if(res?.code === 200) {
                     const newData = res.data.map((value: any, index: number) => {
                         return({
@@ -22,7 +23,6 @@ const ShowOrder = () => {
                     })
                     setData(newData)
                 }
-                console.log(res)
             })()
         }
     }, [id])

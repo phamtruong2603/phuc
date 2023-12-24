@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './index.css';
 import BookTickets from './BookTickets'
 import HeaderWeb from '../../components/Header/HeaderWeb'
@@ -8,6 +8,7 @@ import { getSeatsStatus } from '../../apis/theater';
 import { converDate, converTime, formatVNDCurrency } from '../../components/FuctionGlobal';
 import ConfirmBook from './ConfirmBook';
 import { createPayment } from '../../apis/payment';
+import { AuthContextProvider } from '../../contexts/AuthContext';
 
 const ChooseSeats = () => {
 
@@ -21,16 +22,21 @@ const ChooseSeats = () => {
   const [dataTable, setDataTable] = useState<any>([])
   const [url, setUrl] = useState<string>("");
 
+  const auth = useContext(AuthContextProvider)
+  const user = auth?.userState.user
+
   let sumPrice = 0
 
   const confirmBook = async () => {
     const res = await createPayment({ amount: sumPrice })
-    if(res?.code === 200) {
+    if (res?.code === 200) {
       setUrl(res.data.redirect_url)
+      localStorage.setItem('checkActive', `${checkActive}`)
+      localStorage.setItem('scheduleId', `${scheduleId}`)
+      localStorage.setItem('userId', `${user?.id}`)
     }
     setOpen(true)
   }
-
 
   for (const element of checkActive) {
     if (Number(element.split("-")[0]) < 5) {
@@ -39,6 +45,7 @@ const ChooseSeats = () => {
       sumPrice += 80000
     }
   }
+
   useEffect(() => {
     let key = 0
     let newData = []
@@ -61,7 +68,7 @@ const ChooseSeats = () => {
           }
         )
       }
-      key ++
+      key++
     }
     setDataTable(newData)
     // eslint-disable-next-line react-hooks/exhaustive-deps

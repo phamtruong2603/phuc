@@ -10,7 +10,7 @@ import { getRoomInCinema } from '../../apis/theater';
 import { AuthContextProvider } from '../../contexts/AuthContext';
 import { scheduleEdit } from '../../apis/theater';
 import { MessageContextProvider } from '../../contexts/MessageContext';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getScheduleById } from '../../apis/theater';
 import { SearchOutlined } from '@ant-design/icons';
 dayjs.extend(customParseFormat);
@@ -19,10 +19,6 @@ type FieldType = {};
 
 // Danh sách các phim, Danh sách phòng
 const UpdateSchedule = () => {
-
-  const location = useLocation();
-  const { state } = location;
-  console.log(state)
 
   const { id } = useParams();
   const dateFormat = 'YYYY-MM-DD';
@@ -55,7 +51,6 @@ const UpdateSchedule = () => {
       filmId: req.movies,
       roomId: req.rooms
     }
-    console.log(data)
     const res = await scheduleEdit(data)
     if (res?.code === 200) {
       success("Thành công!!!!!!!!!!!!!!!!!!!!!")

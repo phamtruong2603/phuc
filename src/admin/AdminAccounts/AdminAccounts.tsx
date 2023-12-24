@@ -10,7 +10,6 @@ const AdminAccounts = () => {
     const res = await findAllAdminAccount()
     if (res?.code === 200) {
       const newData = res.data.map((value: any, index: number) => {
-        console.log(value)
         return ({
           id: value.user.id,
           key: index,

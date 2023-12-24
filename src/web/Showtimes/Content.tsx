@@ -23,7 +23,6 @@ const Content: React.FC<IContent> = ({ theater }) => {
   const { id } = useParams()
   const navigate = useNavigate()
 
-  // console.log(theater.name)
 
   const currentDate = new Date() //'Dec 2, 2023'
 
@@ -63,7 +62,6 @@ const Content: React.FC<IContent> = ({ theater }) => {
     }
   }
 
-  console.log(schedules)
 
   useEffect(() => {
     if (id) {
@@ -76,7 +74,7 @@ const Content: React.FC<IContent> = ({ theater }) => {
     <div className='Content-Showtimes'>
       <header>
         <h3>Lịch chiếu phim {theater && theater.name}</h3>
-        <p className='address_Content-Showtimes'>Địa chỉ</p>
+        <p className='address_Content-Showtimes'>{theater && theater.address}</p>
 
         <div className='main-date_Content-Showtimes'>
           {dateOption}

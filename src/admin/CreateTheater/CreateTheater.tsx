@@ -1,7 +1,9 @@
 import { Button, Form, Input, Select } from 'antd'
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { findAllAdminAccountWithoutCinema } from '../../apis/user';
 import { createCinema } from '../../apis/theater';
+import { useNavigate } from 'react-router-dom';
+import { MessageContextProvider } from '../../contexts/MessageContext';
 
 type FieldType = {};
 
@@ -12,10 +14,15 @@ const CreateTheater = () => {
     const [options, setOptions] = useState<any>([])
     const [id, setId] = useState<number>()
 
+    const navigate = useNavigate()
+
+    const mess = useContext(MessageContextProvider)
+  const success = mess?.success
+  const error = mess?.error
+
     useEffect(() => {
         (async() => {
             const res = await findAllAdminAccountWithoutCinema()
-            console.log(res)
             if(res?.code === 200) {
                 const newData = res.data.map((value: any) => {
                     return({
@@ -34,14 +41,17 @@ const CreateTheater = () => {
     };
 
     const onFinish = async (values: FieldType) => {
-        console.log(options)
         const req = {
             adminId: id,
             ...values
         }
-        console.log(req)
-        const res = await createCinema(req)
-        console.log(res)
+        const res = await await createCinema(req)
+        if(res?.code === 200) {
+            success("Tạo mới rạp thành công ^^")
+            navigate("/super-admin/theater-list")
+        } else {
+            error(res?.msg)
+        }
      };
 
     return (
@@ -59,6 +69,7 @@ const CreateTheater = () => {
                 <Form.Item<FieldType>
                     label="Tên rạp"
                     name="name"
+                    rules={[{ required: true, message: 'Vui lòng không thể để trống!' }]}
                 >
                     <Input placeholder='' />
                 </Form.Item>
@@ -66,12 +77,15 @@ const CreateTheater = () => {
                 <Form.Item<FieldType>
                     label="Địa chỉ"
                     name="address"
+                    rules={[{ required: true, message: 'Vui lòng không thể để trống!' }]}
                 >
                     <Input placeholder='' />
                 </Form.Item>
 
                 <Form.Item<FieldType>
                     label="Admin"
+                    name="id"
+                    rules={[{ required: true, message: 'Vui lòng không thể để trống!' }]}
                 >
                     <Select
                         placeholder="Lựa chọn admin"

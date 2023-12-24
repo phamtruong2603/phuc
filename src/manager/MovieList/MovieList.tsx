@@ -33,18 +33,28 @@ const MovieList = () => {
         getFilms()
     }, [])
 
+    console.log(optionsMovies)
+
     return (
         <div className='MovieList MovieSchedule'>
             <header>Danh sách phim</header>
 
-            {optionsMovies && optionsMovies.map((value: any, index: number) => {
-                return (
-                    <Detail
-                        data={value}
-                        getFilms={getFilms}
-                    />
-                )
-            })}
+            {
+                optionsMovies ? optionsMovies.map((value: any, index: number) => {
+                    return (
+                        <Detail
+                            data={value}
+                            getFilms={getFilms}
+                        />
+                    )
+                })
+                    :
+                    <div className='not-data'>
+                        {/* <img src="https://res.cloudinary.com/dbduzdrla/image/upload/v1703320851/phuc/file-and-folder_vbd8uh.png" alt="" /> */}
+                        <img src="https://res.cloudinary.com/dbduzdrla/image/upload/v1703320851/phuc/empty-box_n5egmb.png" alt="" />
+                        Hiện đang không có phim
+                    </div>
+            }
         </div>
     )
 }

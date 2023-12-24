@@ -16,13 +16,11 @@ const Reviews = () => {
       (async () => {
         const res = await getFilmById({ id: Number(id) })
         if (res?.code === 200) {
-          console.log(res.data)
           setData(res.data)
         }
       })()
     }
   }, [id])
-  // console.log(data)
 
   if (!data) return <></>
 

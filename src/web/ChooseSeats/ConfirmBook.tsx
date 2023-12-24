@@ -21,7 +21,6 @@ const ConfirmBook: React.FC<IConfirmBook> = ({
 
     const handleOk = () => {
         window.open(url, "_self")
-        // console.log(url)
     };
 
     const handleCancel = () => {

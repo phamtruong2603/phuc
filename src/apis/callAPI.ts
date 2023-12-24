@@ -1,7 +1,7 @@
 import axios, { AxiosResponse, AxiosRequestConfig } from "axios";
 
-const API_URL = 'http://26.64.67.224:8080';
-
+const API_URL = process.env.REACT_APP_API_URL;
+console.log(process.env)
 interface ApiCallResponse<T> {
     status?: string;
     msg?: string;

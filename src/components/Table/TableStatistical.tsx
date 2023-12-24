@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table } from "antd";
 import type { ColumnsType } from 'antd/es/table';
+import { converDate, converTime, formatVNDCurrency } from '../FuctionGlobal';
 
 interface ITableRoom {
     dataSource: any
@@ -17,36 +18,42 @@ const TableStatistical: React.FC<ITableRoom> = ({ dataSource }) => {
         },
         {
             title: 'Ngày chiếu',
-            dataIndex: 'fullname',
-            key: 'fullname',
+            dataIndex: 'showDate',
+            key: 'showDate',
+            render: (_, record)=> {
+                return(<>{converDate(record.showDate)} {converTime(record.showDate)}</>)
+            },
             align: 'center',
             className: ''
         },
         {
             title: 'Phim chiếu',
-            key: 'email',
-            dataIndex: 'email',
+            key: 'nameFilm',
+            dataIndex: 'nameFilm',
             align: 'center',
             className: ''
         },
         {
             title: 'Phòng chiếu',
-            key: 'username',
-            dataIndex: 'username',
+            key: 'nameRoom',
+            dataIndex: 'nameRoom',
             align: 'center',
             className: ''
         },
         {
             title: 'Số vé bán được',
-            key: 'username',
-            dataIndex: 'username',
+            key: 'ticketsSold',
+            dataIndex: 'ticketsSold',
             align: 'center',
             className: ''
         },
         {
             title: 'Doanh thu',
-            key: 'username',
-            dataIndex: 'username',
+            key: 'revenue',
+            dataIndex: 'revenue',
+            render: (_, record)=> {
+                return(<>{formatVNDCurrency(Number(record.revenue))}</>)
+            },
             align: 'center',
             className: ''
         },

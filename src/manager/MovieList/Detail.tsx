@@ -34,7 +34,6 @@ const Detail: React.FC<IDetail> = ({ data, getFilms }) => {
             async onOk() {
                 try {
                     const res = await deleteMovie({ id: id });
-                    console.log(res)
                     if (res?.code === 200) {
                         getFilms()
                         success("Xoá thành công")
@@ -53,7 +52,6 @@ const Detail: React.FC<IDetail> = ({ data, getFilms }) => {
     if (!data) return <></>
 
     const type = data.types.map((type: any) => type.name)
-    console.log(type)
 
     const urlImg = data.thumnails[0].url
     return (
@@ -103,7 +101,7 @@ const Detail: React.FC<IDetail> = ({ data, getFilms }) => {
 
                     <Button
                         onClick={() => {
-                            navigate(`/admin/movie-list/${data.id}`)
+                            navigate(`${user?.role.name === "ADMIN"? `${`/admin/movie-list/${data.id}`}`: `${`/movie-list/${data.id}`}`}`)
                         }}>Xem chi tiết
                     </Button>
                 </div>

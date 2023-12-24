@@ -3,6 +3,7 @@ import type { DatePickerProps } from 'antd';
 import { useContext, useState } from 'react';
 import { createAcount } from '../../apis/user';
 import { MessageContextProvider } from '../../contexts/MessageContext';
+import { useNavigate } from 'react-router-dom';
 
 type FieldType = {
 
@@ -14,6 +15,8 @@ const CreateAccount = () => {
   const mess = useContext(MessageContextProvider)
   const success = mess?.success
   const error = mess?.error
+
+  const navigate= useNavigate()
  
   const [data, setData] = useState<any>()
 
@@ -23,9 +26,9 @@ const CreateAccount = () => {
       ...values
     }
     const res = await createAcount(req)
-    console.log(res)
     if(res?.code === 200) {
       success("Tạo thành công")
+      navigate("/super-admin/admin-accounts")
     }
     else{
       error(res?.msg)
@@ -33,7 +36,6 @@ const CreateAccount = () => {
   };
 
   const onChange: DatePickerProps['onChange'] = (date, dateString) => {
-    console.log(dateString);
     setData({
       ...data,
       dateOfBirth: dateString
@@ -55,6 +57,7 @@ const CreateAccount = () => {
       <Form.Item<FieldType>
         label="Email"
         name="email"
+        rules={[{ required: true, message: 'Không thể để trống!' }]}
       >
         <Input placeholder='' />
       </Form.Item>
@@ -62,12 +65,15 @@ const CreateAccount = () => {
       <Form.Item<FieldType>
         label="Họ và tên"
         name="fullname"
+        rules={[{ required: true, message: 'Không thể để trống!' }]}
       >
         <Input placeholder='' />
       </Form.Item>
 
       <Form.Item<FieldType>
         label="Ngày sinh"
+        name="dateOfBirth"
+        rules={[{ required: true, message: 'Không thể để trống!' }]}
       >
         <DatePicker
           onChange={onChange}
@@ -78,6 +84,7 @@ const CreateAccount = () => {
       <Form.Item<FieldType>
         label="Địa chỉ"
         name="address"
+        rules={[{ required: true, message: 'Không thể để trống!' }]}
       >
         <Input placeholder='' />
       </Form.Item>
@@ -85,12 +92,14 @@ const CreateAccount = () => {
       <Form.Item<FieldType>
         label="Điện thoại"
         name="phone"
+        rules={[{ required: true, message: 'Không thể để trống!' }]}
       >
         <Input placeholder='' />
       </Form.Item>
       <Form.Item<FieldType>
         label="Tên đăng nhập"
         name="username"
+        rules={[{ required: true, message: 'Không thể để trống!' }]}
       >
         <Input placeholder='' />
       </Form.Item>
@@ -98,9 +107,9 @@ const CreateAccount = () => {
       <Form.Item<FieldType>
         label="Mật Khẩu"
         name="password"
-
+        rules={[{ required: true, message: 'Không thể để trống!' }]}
       >
-        <Input placeholder='' />
+        <Input.Password placeholder='' />
       </Form.Item>
 
 

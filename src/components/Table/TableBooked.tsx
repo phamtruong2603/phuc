@@ -35,7 +35,6 @@ const TableBooked: React.FC<ITableRoom> = ({ dataSource }) => {
             key: 'bookedTime',
             dataIndex: 'bookedTime',
             render: (_, record) => {
-                console.log(record)
                 return (
                     <>
                         <span>{converDate(record.bookedTime)}</span><br />
@@ -58,7 +57,6 @@ const TableBooked: React.FC<ITableRoom> = ({ dataSource }) => {
             key: 'username',
             dataIndex: 'username',
             render: (_, record) => {
-                console.log(record)
                 return (
                     <Space size={"small"}>
                         <Tag bordered={false} color="green">{`Thường: ${record.regulars}`}</Tag>

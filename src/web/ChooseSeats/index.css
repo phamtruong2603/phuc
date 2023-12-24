@@ -82,7 +82,7 @@
 }
 
 .note-BookTickets>p:nth-child(4) {
-    color: rebeccapurple;
+    color: rgb(255, 84, 65);
 }
 
 .note-BookTickets>p:nth-child(1) span {
@@ -98,7 +98,7 @@
 }
 
 .note-BookTickets>p:nth-child(4) span{
-    background-color: rebeccapurple;
+    background-color: rgb(255, 84, 65);
 }
 
 .note-BookTickets>p:nth-child(1) p {

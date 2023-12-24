@@ -82,7 +82,7 @@ const Siderbar = () => {
     <div style={{marginTop: "10vh"}}>
       <Layout>
         <Content >
-          <Layout style={{ padding: '24px 0', background: colorBgContainer, height: '90vh' }}>
+          <Layout style={{ padding: '24px', background: colorBgContainer, height: '90vh' }}>
             <Sider style={{ background: colorBgContainer }} width={250}>
               <Menu
               className='siderbar'

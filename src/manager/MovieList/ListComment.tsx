@@ -8,7 +8,6 @@ interface IListComment {
 const ListComment:React.FC<IListComment> = ({data}) => {
 
     const day = postingTime(new Date(data.createdAt))
-    console.log(data)
     return (
         <div className='ListComment'>
             <div className='ListComment_infor'>

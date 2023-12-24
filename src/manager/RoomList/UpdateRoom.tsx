@@ -26,9 +26,7 @@ const UpdateRoom = () => {
             ...value,
             cinemaId: cinema.id
         }
-        console.log(req)
         const res = await createRoom(req)
-        console.log(res)
         if(res?.code === 200) {
             success("Tạo phòng thành công :vv")
         }else {

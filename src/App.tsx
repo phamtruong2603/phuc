@@ -4,13 +4,15 @@ import './App.css';
 //import layout
 import Admin from './admin';
 import Manager from './manager';
-import Web from './web';
+import Web from './web/Home';
 import DashBoard from './web/DashBoard';
 import Showtimes from './web/Showtimes';
 import ChooseSeats from './web/ChooseSeats/ChooseSeats';
+import PaymentSuccess from './web/PaymentSuccess';
 import Form from './components/FormLogin';
 import Register from './components/FormLogin/Register';
 import NotFound from './components/NotFound';
+import MovieListWeb from './web/MovieList';
 
 //
 import { AuthContext } from './contexts/AuthContext';
@@ -18,6 +20,7 @@ import MessageContext from './contexts/MessageContext';
 import MoviesContext from './contexts/Movies';
 
 import ProtectedMain from './routes/ProtectedRoute';
+import DetailMovie from './web/MovieList/DetailMovie';
 
 function App() {
   return (
@@ -31,12 +34,16 @@ function App() {
                 <Route path="admin/*" element={<Manager />} />
                 <Route path="/update-information" element={<DashBoard />} />
                 <Route path="/not-found" element={<NotFound />} />
+                <Route path="/showtimes/:id/choose-seats/:scheduleId" element={<ChooseSeats />} />
+                <Route path="/movie-list" element={<MovieListWeb />} />
+                <Route path="/movie-list/:id" element={<DetailMovie />} />
+                <Route path="/payment-success/*" element={<PaymentSuccess />} />
               </Route>
               <Route path="/" element={<Web />} />
               <Route path="/showtimes" element={<Showtimes />} />
               <Route path="/showtimes/:id" element={<Showtimes />} />
-              <Route path="/showtimes/:id/choose-seats/:scheduleId" element={<ChooseSeats />} />
-              {/* choose-seats */}
+
+
               <Route path="/login" element={<Form />} />
               <Route path="/register" element={<Register />} />
               <Route path='*' element={<NotFound />} />

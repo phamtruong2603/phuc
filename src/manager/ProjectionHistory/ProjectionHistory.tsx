@@ -38,13 +38,21 @@ const ProjectionHistory = () => {
   return (
     <div className='MovieSchedule'>
       <header>Lịch sử chiếu</header>
-      {schedule.map((value: any, index: number) => {
-                return (
-                    <Detail 
-                        data={value}
-                    />
-                )
-            })}
+      {!schedule.length ?
+        <div className='not-data'>
+          {/* <img src="https://res.cloudinary.com/dbduzdrla/image/upload/v1703320851/phuc/file-and-folder_vbd8uh.png" alt="" /> */}
+          <img src="https://res.cloudinary.com/dbduzdrla/image/upload/v1703320851/phuc/empty-box_n5egmb.png" alt="" />
+          Hiện đang không có lịch sử chiếu
+        </div>
+        :
+        schedule.map((value: any, index: number) => {
+          return (
+            <Detail
+              data={value}
+            />
+          )
+        })
+      }
     </div>
   )
 }

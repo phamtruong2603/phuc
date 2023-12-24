@@ -74,8 +74,8 @@ const HeaderWeb = () => {
           >
 
             <Link to="/showtimes" className={`${urlCurrent === "showtimes" ? "bottomCurrent" : ""}`}><span>Lịch chiếu</span></Link>
-            <Link to="/b" className={`${urlCurrent === "b" ? "bottomCurrent" : ""}`}><span>Phim chiếu</span></Link>
-            <Link to="/update-information" className={`${urlCurrent === "update-information" ? "bottomCurrent" : ""}`}><span>Hồ sơ</span></Link>
+            <Link to="/movie-list" className={`${urlCurrent === "movie-list" ? "bottomCurrent" : ""}`}><span>Phim chiếu</span></Link>
+            <Link to="/update-information" className={`${urlCurrent === "update-information" ? "bottomCurrent" : ""}`}><span>Lịch sử đặt vé</span></Link>
 
             <p className='name_header'> Xin chào {user.user?.username}</p>
 

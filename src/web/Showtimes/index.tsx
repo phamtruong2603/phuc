@@ -4,9 +4,11 @@ import HeaderWeb from '../../components/Header/HeaderWeb';
 import SideBar from './SideBar';
 import Content from './Content';
 import { GetAllCinema } from '../../apis/theater';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Showtimes = () => {
+
+  const {id } = useParams()
 
   const [listTheater, setListTheater] = useState<any>()
 
@@ -24,7 +26,7 @@ const Showtimes = () => {
   }, [])
 
   useEffect(() => {
-    if (listTheater) {
+    if (listTheater && !id) {
       navigate(`/showtimes/${listTheater[0].id}`)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

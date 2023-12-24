@@ -1,5 +1,6 @@
-import React, { } from 'react';
+import React, { useContext } from 'react';
 import { Col, Row } from 'antd';
+import { MessageContextProvider } from '../../contexts/MessageContext';
 
 interface IBookTickets {
   row: any
@@ -20,11 +21,19 @@ const BookTickets: React.FC<IBookTickets> = ({
 }
 ) => {
 
+  const mess = useContext(MessageContextProvider)
+  const warning = mess?.warning
+
   const funcActive = (check: string, background: string) => {
     const removeIndex = checkActive.findIndex((item) => item === check);
-    if (removeIndex === -1 && background !== "rgb(133, 133, 133)") {
-      setCheckActive([...checkActive, check])
+    if (removeIndex === -1) {
+      if (background === "rgb(133, 133, 133)") {
+        warning("Ghế đã được chọn")
+      } else {
+        setCheckActive([...checkActive, check])
+      }
     } else {
+
       const newCheckActive = checkActive.filter((item: string) => item !== check);
       setCheckActive(newCheckActive);
     }
@@ -39,7 +48,7 @@ const BookTickets: React.FC<IBookTickets> = ({
         background = 'rgb(133, 133, 133)' //đã đặt
       }
       if (checkActive.includes(`${i + 1}-${j + 1}`)) {
-        background = 'red' // lựa chọn
+        background = 'rgb(255, 84, 65)' // lựa chọn
       }
       cols.push(
         <Col
@@ -61,8 +70,8 @@ const BookTickets: React.FC<IBookTickets> = ({
       </Row>
 
       <div className='note-BookTickets'>
-        <p><span></span><p>ghế Vip <p>(50.000VND)</p></p></p>
-        <p><span></span><p>ghế thường <p>(80.000VND)</p></p></p>
+        <p><span></span><p>ghế Vip <p>(80.000VND)</p></p></p>
+        <p><span></span><p>ghế thường <p>(50.000VND)</p></p></p>
         <p><span></span>ghế đã đặt</p>
         <p><span></span>ghế vừa chọn</p>
       </div>

@@ -14,3 +14,21 @@ export const createPayment = async(
 ) => {
     return await callApi<any>(`payment-service/api/v1/payment/create-payment`, "get", data)
 }
+
+// payment-service/api/v1/payment/result-info
+// private Integer scheduleId;
+//     private Integer userId;
+//     private List<String> seats;
+//     private String responseCode;
+
+export const resultInfoPayment = async(
+    data: {
+        scheduleId: number
+        userId: number
+        responseCode: string
+        seats: string[]
+    }
+) => {
+    console.log(data)
+    return await callApi<any>(`payment-service/api/v1/payment/result-info`, "post", data)
+}

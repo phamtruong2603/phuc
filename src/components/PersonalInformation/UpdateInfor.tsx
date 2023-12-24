@@ -10,6 +10,7 @@ const UpdateInfor = () => {
 
     const auth = useContext(AuthContextProvider)
     const user = auth?.userState.user
+    const setUserState = auth?.setUserState
 
     const mess = useContext(MessageContextProvider)
     const success = mess?.success
@@ -44,12 +45,17 @@ const UpdateInfor = () => {
             dateOfBirth: newDate,
             username: username
         };
-        console.log(data);
         try {
             const res = await editAcount(data)
-            console.log(res)
             if (res?.code === 200) {
                 success("Thay đổi thông tin thành công")
+                console.log(res.data)
+                setUserState?.({
+                    isLogin: true,
+                    user: res.data,
+                    token: auth?.userState.token
+                })
+
             } else {
                 warning(res?.msg)
             }
@@ -68,10 +74,8 @@ const UpdateInfor = () => {
                 oldPassword: password,
                 newPassword: newPassword,
             };
-            console.log(data)
             try {
                 const res = await changePassword(data)
-                console.log(res)
                 if (res?.code === 200) {
                     navigate("/login")
                     success("Thay đổi mật khẩu thành công");
@@ -88,6 +92,7 @@ const UpdateInfor = () => {
 
     return (
         <div>
+            <h3 className='h3custom'>Thay đổi thông tin cá nhân</h3>
             {changeDisplay ? (
                 <Form
                     name="personall_form"

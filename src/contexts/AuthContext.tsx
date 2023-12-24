@@ -15,7 +15,7 @@ interface IAuthContextProvider {
 
 export interface IUserState {
     user: User | null
-    token: string | null
+    token: string | null | undefined
     isLogin: boolean
 }
 

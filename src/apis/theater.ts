@@ -151,5 +151,20 @@ export const getSeatsStatus = async (
         scheduleId: number
     }
 ) => {
-    return await callApi<any>(`schedule-service//api/v1/schedule/get-seats-status`, "get", data)
+    return await callApi<any>(`schedule-service/api/v1/schedule/get-seats-status`, "get", data)
+}
+
+
+// schedule-service/api/v1/statistic/view-revenue-statistic
+// @RequestParam Integer cinemaId,
+//                                       @RequestParam String startDate,
+//                                       @RequestParam(required = false) String endDate
+export const getStatistic = async (
+    data: {
+        cinemaId: number
+        startDate: string
+        endDate: string
+    }
+) => {
+    return await callApi<any>(`schedule-service/api/v1/statistic/view-revenue-statistic?cinemaId=${data.cinemaId}&startDate=${data.startDate}&endDate=${data.endDate}`, "post")
 }

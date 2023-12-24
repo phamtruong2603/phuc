@@ -14,8 +14,6 @@ const Header = () => {
   const user = auth?.userState
   const navigate = useNavigate();
 
-  console.log(user?.user?.role.name)
-
   const navigateLoginForm = (e: any) => {
     e.preventDefault();
     navigate('/login')

@@ -5,7 +5,7 @@
 }
 
 .content {
-    padding: 10vh 1rem 0 1rem;
+    padding: 10vh 2rem 0 2rem;
     flex: 1 !important;
     /* padding: 1rem; */
 }
@@ -52,4 +52,32 @@ a {
 .content-web {
     padding: 0 2rem;
     padding-top: 10vh
+}
+
+.MovieListWeb {
+    padding: 5rem;
+    padding-top: 11vh;
+}
+
+.h3custom {
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+}
+
+.not-data {
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 8rem;
+    font-style: italic;
+    font-weight: bold;
+    color: rgb(100, 100, 100);
+}
+
+.not-data img{
+    width: 100px;
+    margin-bottom: 1rem;
 }

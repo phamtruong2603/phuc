@@ -68,12 +68,12 @@ const Form = () => {
                     <h1 onClick={navigateHome}>LOGO</h1>
                     <form onSubmit={submitFormLogin}>
                         <div>
-                            <label htmlFor="username">Tên đăng nhập:</label>
+                            <label htmlFor="username">Username:</label>
                             <input
                                 id='username'
                                 type="username"
                                 name='username'
-                                placeholder='username@gmail.com'
+                                placeholder='username'
                                 onChange={changeInfor}
                             />
                         </div>

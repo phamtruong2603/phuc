@@ -31,7 +31,6 @@ const Detail: React.FC<IDetail> = ({ data, getSchedule }) => {
             async onOk() {
                 try {
                     const res = await deleteSchedule({ scheduleId: id });
-                    console.log(res)
                     if (res?.code === 200) {
                         getSchedule()
                         success("Xoá thành công")

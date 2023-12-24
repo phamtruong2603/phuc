@@ -42,13 +42,30 @@
 
 .name_theater-SideBar {
     display: flex;
+    justify-content: center;
+    border-bottom: 1px solid rgb(234, 234, 234);
+    padding: 0.2rem;
+    align-items: center;
+}
+
+.name_theater-SideBar>div {
+    width: 80%;
+    padding: 0.4rem 1rem;
+    border-radius: 10px;
+    display: flex;
     justify-content: space-between;
     font-size: 1.1rem;
-    /* margin: 0.5rem 0; */
-    /* font-weight: 600; */
-    border-bottom: 1px solid rgb(234, 234, 234);
-    padding: 0.5rem;
+    align-items: center;
     cursor: pointer;
+    margin: 0.2rem 0;
+}
+
+.check_name_theater-SideBar>div {
+    background-color: rgb(204, 236, 255);
+}
+
+.name_theater-SideBar img{
+    width: 20px;
 }
 
 /* ------------------------------------------------------------------------------------- */

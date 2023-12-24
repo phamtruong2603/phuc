@@ -88,7 +88,6 @@ const UpdateMovie = () => {
         let checkFile
         if(file) {
             checkFile = file.filter((item: any) => {
-                console.log(item.id)
                 return item.id === undefined
             })
         }
@@ -106,7 +105,6 @@ const UpdateMovie = () => {
             description,
             duration
         }
-        console.log(req)
         const res = await updateMovie(req)
         if(res?.code === 200) {
             success("Update thành công")
