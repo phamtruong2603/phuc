@@ -33,8 +33,6 @@ const MovieList = () => {
         getFilms()
     }, [])
 
-    console.log(optionsMovies)
-
     return (
         <div className='MovieList MovieSchedule'>
             <header>Danh sách phim</header>
@@ -43,6 +41,7 @@ const MovieList = () => {
                 optionsMovies ? optionsMovies.map((value: any, index: number) => {
                     return (
                         <Detail
+                            key={index}
                             data={value}
                             getFilms={getFilms}
                         />

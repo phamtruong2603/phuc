@@ -10,7 +10,7 @@ const { confirm } = Modal;
 
 interface IDetail {
     data: any
-    getFilms: any
+    getFilms?: any
 }
 
 const Detail: React.FC<IDetail> = ({ data, getFilms }) => {
@@ -60,9 +60,10 @@ const Detail: React.FC<IDetail> = ({ data, getFilms }) => {
                 <Image
                     width={250}
                     src={urlImg}
+                    style={{minWidth: 250}}
                 />
                 <div>
-                    <span>Tên phim: {data.name}</span>
+                    <span style={{fontWeight: "bold", fontSize:"1.1rem"}}>Tên phim: {data.name}</span>
                     <span>Thể loại: {type.map((value: any, index: number) => <>{value}{type.length - 1 === index ? "" : ", "}</>)}</span>
                     <span>Mô tả: {data.description}</span>
                     <span>Thời lượng: {data.duration} phút</span>

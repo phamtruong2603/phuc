@@ -3,7 +3,7 @@
     padding-top: 14vh;
 }
 
-.search-home {
+.search-home form{
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -11,7 +11,7 @@
     color: #71d3f7;
 }
 
-.search-home label {
+.search-home form label {
     width: 20%;
     height: 3rem;
     display: flex;
@@ -30,11 +30,11 @@
     color: #71d3f7;
 }
 
-.search-home input::placeholder {
+.search-home form input::placeholder {
     color: #71d3f7;
 }
 
-.search-home button {
+.search-home form button {
     width: 10%;
     height: 3rem;
     outline: none;

@@ -67,3 +67,14 @@ export const rateMovie = async(
 ) => {
     return await callApi<any>(`review-service/api/v1/rating/create-rating`, "post", data)
 }
+
+// film-service/api/v1/film/search-film-by-name
+// Getmapping
+// gửi lên name
+export const getMoviesByName = async(
+    data: {
+        name: string
+    }
+) => {
+    return await callApi<any>(`film-service/api/v1/film/search-film-by-name`, "get", data)
+}
