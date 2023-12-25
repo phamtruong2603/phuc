@@ -70,7 +70,7 @@ const Header = () => {
               menu={{ items }}
               trigger={["click"]}
             >
-              <Space>
+              <Space style={{cursor:"pointer"}}> 
                 <Avatar width='50px' />
               </Space>
             </Dropdown>

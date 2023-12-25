@@ -1,17 +1,19 @@
 import { Button, Image } from 'antd'
 import React, { useState } from 'react'
 // import { useNavigate } from 'react-router-dom'
-import { converDate, converTime,formatVNDCurrency } from '../../components/FuctionGlobal'
+import { converDate, converTime, formatVNDCurrency } from '../../components/FuctionGlobal'
 import ModalRating from './ModalRating'
+import DetailBooking from './DetailBooking'
 
 interface IDetail {
     movie: any
+    getHistoryBooking: any
 }
 
-const Detail:React.FC<IDetail> = ({movie}) => {
+const Detail: React.FC<IDetail> = ({ movie, getHistoryBooking }) => {
 
     const [openRated, setOpenRated] = useState<boolean>(false)
-
+    const [openDetail, setOpenDetail] = useState<boolean>(false)
     // const navigate = useNavigate()
 
     const urlImg = movie?.film?.thumnails[0]?.url ? movie.film.thumnails[0]?.url : ""
@@ -19,7 +21,6 @@ const Detail:React.FC<IDetail> = ({movie}) => {
     const type = movie.film.types.map((type: any) => type.name)
 
     const openModalRating = () => {
-        console.log(11111111)
         setOpenRated(true)
     }
 
@@ -50,15 +51,31 @@ const Detail:React.FC<IDetail> = ({movie}) => {
             </div>
 
             <div className='right_Detail'>
-                <Button>Xem chi tiết</Button><br /><br />
-                {!movie.rated ? <Button onClick={() => openModalRating()}>Đánh giá ngay</Button>: <>Đã đánh giá</>}
+                <Button onClick={() => setOpenDetail(true)}>Xem chi tiết</Button>
+                {!movie.rated ?
+                    <Button onClick={() => openModalRating()}>Đánh giá ngay</Button>
+                    : <div className='success-booking-history'>
+                        <img src="https://pixlok.com/wp-content/uploads/2021/12/Green-Tick-Icon-SVG-03vd.png" alt="" />
+                       <span>Đã đánh giá</span>
+                    </div>}
             </div>
 
             {
-                openRated && 
-                <ModalRating 
+                openRated &&
+                <ModalRating
                     open={openRated}
                     setOpen={setOpenRated}
+                    movie={movie}
+                    getHistoryBooking={getHistoryBooking}
+                />
+            }
+
+            {
+                openDetail &&
+                <DetailBooking
+                    open={openDetail}
+                    setOpen={setOpenDetail}
+                    movie={movie}
                 />
             }
         </div>

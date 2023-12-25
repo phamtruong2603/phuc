@@ -19,3 +19,22 @@
 .movie-quality span{ 
     margin: 0.2rem 0;
 }
+.right_Detail {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.right_Detail *{
+    margin-bottom: 1rem;
+}
+.success-booking-history {
+    display: flex;
+    align-items: center;
+    color: green;
+}
+.success-booking-history img {
+    height: 20px;
+    width: 20px;
+}

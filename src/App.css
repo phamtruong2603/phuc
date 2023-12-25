@@ -1,3 +1,7 @@
+* {
+    font-family: 'Inter', sans-serif;
+}
+
 .manager>div {
     display: flex;
     justify-content: space-between;
@@ -31,7 +35,7 @@ a {
     padding: 1rem 5rem;
 }
 
-.MovieSchedule header{
+.MovieSchedule header {
     display: flex;
     justify-content: center;
     font-size: 1.2rem;
@@ -39,14 +43,14 @@ a {
     font-weight: bold;
 }
 
-.blocked_TableAdminAccounts > div{
+.blocked_TableAdminAccounts>div {
     /* width: 250px; */
     display: flex;
     justify-content: space-between;
 }
 
-.blocked_TableAdminAccounts button{
-   width: 80px;
+.blocked_TableAdminAccounts button {
+    width: 80px;
 }
 
 .content-web {
@@ -72,12 +76,12 @@ a {
     flex-direction: column;
     align-items: center;
     margin-top: 8rem;
-    font-style: italic;
+    /* font-style: italic; */
     font-weight: bold;
     color: rgb(100, 100, 100);
 }
 
-.not-data img{
+.not-data img {
     width: 100px;
     margin-bottom: 1rem;
 }

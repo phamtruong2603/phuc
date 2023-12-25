@@ -52,3 +52,18 @@ export const deleteMovie = async(
     return await callApi<any>(`film-service/api/v1/film/delete/${data.id}`, "post")
 }
 
+// review-service/api/v1/rating/create-rating
+// private Integer filmId;
+//     private Integer userId;
+//     private Integer star;
+//     private String comment;
+export const rateMovie = async(
+    data: {
+        filmId: number,
+        userId: number
+        star: number,
+        comment: string
+    }
+) => {
+    return await callApi<any>(`review-service/api/v1/rating/create-rating`, "post", data)
+}

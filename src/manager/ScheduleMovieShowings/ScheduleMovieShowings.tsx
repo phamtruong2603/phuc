@@ -144,6 +144,8 @@ const ScheduleMovieShowings = () => {
       >
         <Form.Item<FieldType>
           label="Chọn phim"
+          name="movies"
+          rules={[{ required: true, message: 'Không được để trống!!!' }]}
         >
           <Select
             // mode="multiple"
@@ -157,6 +159,8 @@ const ScheduleMovieShowings = () => {
 
         <Form.Item<FieldType>
           label="Chọn phòng chiếu"
+          name="rooms"
+          rules={[{ required: true, message: 'Không được để trống!!!' }]}
         >
           <Select
             // mode="multiple"
