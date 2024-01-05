@@ -151,3 +151,91 @@
     border-top: 1px solid #71d3f7;
     padding-top: 1rem;
 }
+
+
+.forgot-password {
+    min-width: 50%;
+    height: 100%;
+    padding-right: 2rem;
+    /* background-color: rgb(200, 241, 241); */
+}
+
+.forgot-password .instruct{
+    margin: 4rem 0;
+}
+
+.forgot-password .instruct h3{
+    margin: 0.5rem 0;
+}
+
+.forgot-password .instruct p{
+    font-size: 0.9rem;
+    padding: 0 1rem;
+}
+
+.forgot-password .instruct .instruct-main{
+    padding: 0rem;
+    margin-bottom: 0.5rem;
+}
+
+.forgot-password h1 {
+    cursor: pointer;
+    color: #71d3f7;
+}
+
+.forgot-password form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    /* margin-top: 18%; */
+}
+
+.forgot-password label {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    margin: 0.5rem 0;
+}
+
+.forgot-password form>div {
+    width: 70%;
+    margin: 0.5rem auto;
+}
+
+.forgot-password input {
+    width: 100%;
+    border-radius: 5px;
+    padding: 15px 20px;
+    outline: none;
+    /* margin-bottom: 20px; */
+    border: 1px solid #71d3f7;
+}
+
+.forgot-password button {
+    width: 200px;
+    padding: 15px 20px;
+    background-color: #71d3f7;
+    color: white;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.forgot-password span {
+    width: 70%;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 0.8rem;
+    margin: 1rem;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.forgot-password>p {
+    margin-top: 1rem;
+    text-align: center;
+    border-top: 1px solid #71d3f7;
+    padding-top: 1rem;
+}

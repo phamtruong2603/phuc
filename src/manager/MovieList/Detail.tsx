@@ -9,11 +9,12 @@ import { deleteMovie } from '../../apis/movie';
 const { confirm } = Modal;
 
 interface IDetail {
+    key: number
     data: any
     getFilms?: any
 }
 
-const Detail: React.FC<IDetail> = ({ data, getFilms }) => {
+const Detail: React.FC<IDetail> = ({data, getFilms }) => {
 
     const navigate = useNavigate()
     const auth = useContext(AuthContextProvider)
@@ -55,7 +56,7 @@ const Detail: React.FC<IDetail> = ({ data, getFilms }) => {
 
     const urlImg = data.thumnails[0]?.url ? data.thumnails[0]?.url : ""
     return (
-        <div className='Detail'>
+        <div className='Detail' key={data.id}>
             <div className='left_Detail'>
                 <Image
                     width={250}
@@ -64,7 +65,7 @@ const Detail: React.FC<IDetail> = ({ data, getFilms }) => {
                 />
                 <div>
                     <span style={{fontWeight: "bold", fontSize:"1.1rem"}}>Tên phim: {data.name}</span>
-                    <span>Thể loại: {type.map((value: any, index: number) => <>{value}{type.length - 1 === index ? "" : ", "}</>)}</span>
+                    <span>Thể loại: {type.map((value: any, index: number) => <div key={index}>{value}{type.length - 1 === index ? "" : ", "}</div>)}</span>
                     <span>Mô tả: {data.description}</span>
                     <span>Thời lượng: {data.duration} phút</span>
                     <span>Ngày phát hành: {converDate(data.releaseDate)}</span>

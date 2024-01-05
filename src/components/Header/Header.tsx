@@ -54,7 +54,7 @@ const Header = () => {
 
   return (
     <div className='header'>
-      <div className='logo'>LOGO</div>
+      <div className='logo'>FILM BOOKING</div>
       <div className='header-right'>
         <div className='option_main'>
           

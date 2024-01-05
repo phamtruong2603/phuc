@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import Detail from './Detail';
 import { AuthContextProvider } from '../../contexts/AuthContext';
 import { MoviesContextProvider } from '../../contexts/Movies';
-import { getHistoryScheduleInCinema } from '../../apis/theater';
+import { getHistoryScheduleInCinemaByPage } from '../../apis/theater';
+import PaginationCustom from '../../components/Pagination/PaginationCustom';
 
 const ProjectionHistory = () => {
 
@@ -14,6 +15,33 @@ const ProjectionHistory = () => {
   const findCinema = movieContext?.findCinema
 
   const [schedule, setSchedule] = useState<any>([])
+  const [page, setPage] = useState<any>()
+
+
+  const getFilms = async (pageCurrent: number = 1, perPage: number = 6) => {
+    // const res = await getHistoryScheduleInCinema({ cinemaId: movies?.cinema.id })
+    const res = await getHistoryScheduleInCinemaByPage({
+      cinemaId: movies?.cinema.id,
+      page: pageCurrent,
+      perPage: perPage
+    })
+    console.log(res)
+    if (res?.code === 200) {
+      const page = res.data.pageInfo
+      setPage({
+        pageSize: 6,
+        total: page.totalItems,
+      })
+
+      const newData = res.data.scheduleResponseList.map((film: any, index: number) => {
+        return {
+          key: index,
+          ...film
+        }
+      })
+      setSchedule(newData)
+    }
+  }
 
   useEffect(() => {
     if (user) {
@@ -23,16 +51,11 @@ const ProjectionHistory = () => {
   }, [user])
 
   useEffect(() => {
-
     if (movies?.cinema.id) {
-      (async () => {
-        const res = await getHistoryScheduleInCinema({ cinemaId: movies?.cinema.id })
-        if (res?.code === 200) {
-          setSchedule(res.data)
-        }
-      })()
+      getFilms()
     }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [movies])
 
   return (
@@ -48,10 +71,19 @@ const ProjectionHistory = () => {
         schedule.map((value: any, index: number) => {
           return (
             <Detail
+              key={index}
               data={value}
             />
           )
         })
+      }
+      {
+        schedule.length && <PaginationCustom
+          pageSize={page.pageSize}
+          total={page.total}
+          pageCurrent={page.pageCurrent}
+          getFilms={getFilms}
+        />
       }
     </div>
   )

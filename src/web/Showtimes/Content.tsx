@@ -26,7 +26,9 @@ const Content: React.FC<IContent> = ({ theater }) => {
 
   const currentDate = new Date() //'Dec 2, 2023'
 
-  const [date, setDate] = useState<string>(`${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`)
+  const [date, setDate] = useState<string>(
+    `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`
+  )
 
   currentDate.setDate(currentDate.getDate() - 1)
 
@@ -36,14 +38,14 @@ const Content: React.FC<IContent> = ({ theater }) => {
 
     currentDate.setDate(currentDate.getDate() + 1)
     const currentDayOfWeek = current_day[currentDate.getDay()];
-    const day = currentDate.getDate()
-    const month = currentDate.getMonth()
+    const day = currentDate.getDate().toString().padStart(2, '0')
+    const month = (currentDate.getMonth() + 1).toString().padStart(2, '0')
     const year = currentDate.getFullYear()
 
     dateOption.push(
       <div
-        key={i} className={`${Number(date.split("-")[2]) !== day ? "date_Content-Showtimes" : "reverse-date_Content-Showtimes"}`}
-        onClick={() => { setDate(`${year}-${month + 1}-${day}`) }}
+        key={i} className={`${date.split("-")[2] !== day ? "date_Content-Showtimes" : "reverse-date_Content-Showtimes"}`}
+        onClick={() => { setDate(`${year}-${month}-${day}`) }}
       >
         <p>{day}</p>
         <p>{i === 0 ? "hôm nay" : currentDayOfWeek}</p>
@@ -52,6 +54,7 @@ const Content: React.FC<IContent> = ({ theater }) => {
   }
 
   const getAllScheduleByCinema = async (cinemaId: number, date: string) => {
+    console.log(date)
     const data = {
       cinemaId: cinemaId,
       date: date

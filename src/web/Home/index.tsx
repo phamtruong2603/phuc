@@ -76,12 +76,7 @@ const Web = () => {
             </>
             :
             <div className='img-home'>
-              <iframe
-                width="100%" height="100%"
-                src="https://www.youtube.com/embed/pFZ3-DlKv0Y?si=tcLhv3JNBjIL0CW-" title="YouTube video player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              ></iframe>
+              <img src="https://cdnphoto.dantri.com.vn/9fJvg-3fkeZdXc7efkMQPtmeaDI=/zoom/1200_630/2021/03/08/dan-triv-2-docx-1615178918200.jpeg" alt="" />
             </div>
         }
       </div>

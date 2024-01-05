@@ -78,3 +78,17 @@ export const getMoviesByName = async(
 ) => {
     return await callApi<any>(`film-service/api/v1/film/search-film-by-name`, "get", data)
 }
+
+// @GetMapping("/films")
+//     public Result getFilms( @RequestParam(defaultValue = "0") int page,
+//                             @RequestParam(defaultValue = "5") int perPage) {
+//         return filmService.getFilms(page, perPage);
+//     }
+export const getAllFilmsPage = async(
+    data: {
+        page: number
+        perPage: number
+    }
+) => {
+    return await callApi<any>(`film-service/api/v1/film/films`, "get", data)
+}

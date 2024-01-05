@@ -10,6 +10,7 @@ import Showtimes from './web/Showtimes';
 import ChooseSeats from './web/ChooseSeats/ChooseSeats';
 import PaymentSuccess from './web/PaymentSuccess';
 import Form from './components/FormLogin';
+import ForgotPassword from './components/FormLogin/ForgotPassword';
 import Register from './components/FormLogin/Register';
 import NotFound from './components/NotFound';
 import MovieListWeb from './web/MovieList';
@@ -44,6 +45,7 @@ function App() {
               <Route path="/movie-list" element={<MovieListWeb />} />
               <Route path="/movie-list/:id" element={<DetailMovie />} />
               <Route path="/login" element={<Form />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/register" element={<Register />} />
               <Route path="/booking-history" element={<BookingHistory />} />
               <Route path='*' element={<NotFound />} />

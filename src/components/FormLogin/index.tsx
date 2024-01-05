@@ -65,7 +65,7 @@ const Form = () => {
             <div>
 
                 <div className='login-form'>
-                    <h1 onClick={navigateHome}>LOGO</h1>
+                    <h1 onClick={navigateHome}>FILM BOOKING</h1>
                     <form onSubmit={submitFormLogin}>
                         <div>
                             <label htmlFor="username">Username:</label>
@@ -87,7 +87,7 @@ const Form = () => {
                                 onChange={changeInfor}
                             />
                         </div>
-                        <span>Quên mật khẩu???</span>
+                        <span onClick={() => navigate("/forgot-password")}>Quên mật khẩu???</span>
                         <button>Đăng nhập</button>
                     </form>
 
@@ -95,7 +95,7 @@ const Form = () => {
                 </div>
 
                 <div className='img-loginform'>
-                    <img src={""} alt="" />
+                    <img src={"https://kaliforms.com/wp-content/uploads/2021/04/movie-ticket-booking-form-scaled.jpg"} alt="" />
                 </div>
             </div>
         </div>

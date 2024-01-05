@@ -174,3 +174,37 @@ export const getStatistic = async (
 export const historyBooking = async () => {
     return await callApi<any>(`schedule-service/api/v1/booking/history`, "get")
 }
+
+
+// @GetMapping("/schedule-history-by-cinema")
+//     public Result getHistoryScheduleInCinemaByPage(@RequestParam Integer cinemaId,
+//                                                    @RequestParam(defaultValue = "0") Integer page,
+//                                                    @RequestParam(defaultValue = "5") Integer page) {
+//         return scheduleService.findAllHistoryScheduleInCinemaByPage(cinemaId, page, perPage);
+//     }
+
+export const getHistoryScheduleInCinemaByPage = async (
+    data: {
+        cinemaId: number
+        page: number
+        perPage: number
+    }
+) => {
+    return await callApi<any>(`schedule-service/api/v1/schedule/schedule-history-by-cinema`, "get", data)
+}
+
+// @GetMapping("/schedule-by-cinema") // lay schedule theo rap
+//     public Result getCurrentScheduleInCinemaByPage(@RequestParam Integer cinemaId,
+//                                                    @RequestParam(defaultValue = "0") Integer page,
+//                                                    @RequestParam(defaultValue = "5") Integer perPage) {
+//         return scheduleService.findAllCurrentScheduleInCinemaByPage(cinemaId, page, perPage);
+//     }
+export const getCurrentScheduleInCinemaByPage = async (
+    data: {
+        cinemaId: number
+        page: number
+        perPage: number
+    }
+) => {
+    return await callApi<any>(`schedule-service/api/v1/schedule/schedule-by-cinema`, "get", data)
+}

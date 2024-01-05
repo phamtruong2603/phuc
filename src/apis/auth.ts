@@ -49,3 +49,15 @@ export const loginByToken = async () => {
 export const getAllUser = async () => {
     return await callApi<User[]>('user/get-all', "get")
 }
+
+// user-service/api/v1/auth/forgot-password
+// tải lên String email
+// getmapping
+
+export const forgotPassword = async (
+    data: {
+        email: string
+    }
+) => {
+    return await callApi<any>("user-service/api/v1/auth/forgot-password", "post", data)
+}
